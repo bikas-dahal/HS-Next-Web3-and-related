@@ -38,7 +38,7 @@ const Navbar = () => {
     // }, []);
 
     return (
-        <nav className="bg-pink-900 border-b border-blue-500">
+        <nav className="bg-sky-900 border-b border-blue-500">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-20 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -57,13 +57,13 @@ const Navbar = () => {
                                 className="block h-6 w-6"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                                 aria-hidden="true"
                             >
                                 <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                                 />
                             </svg>
