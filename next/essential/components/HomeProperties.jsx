@@ -2,10 +2,17 @@ import Link from 'next/link';
 import PropertyCard from './PropertyCard';
 // import connectDB from '@/config/database';
 // import Property from '@/models/Property';
-import properties from '@/properties.json'
+// import properties from '@/properties.json'
+
+import { fetchProperties } from "@/utils/requests";
 
 const HomeProperties = async () => {
     // await connectDB();
+    const properties = await fetchProperties();
+    // const propertiesData = await fetchProperties();
+    // console.log('data', propertiesData)
+    // const properties = propertiesData.properties || []; // Access nested properties array
+    // console.log('Properties:', properties);
 
     // Get the 3 latest properties
     const recentProperties = properties
