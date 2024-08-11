@@ -8,7 +8,7 @@ async function fetchProperties() {
             return []
         }
         const res = await fetch(`${apiDomain}/properties/`, {
-            method: 'GET',
+            cache: 'no-store',
         })
         if (!res.ok) {
             throw new Error('Failed to fetch properties.');
