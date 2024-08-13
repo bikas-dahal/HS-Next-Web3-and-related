@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import profileDefault from '@/assets/images/profile.png'
+import  { useEffect, useState} from "react";
 
 
 const ProfilePage = () => {
@@ -10,6 +11,8 @@ const ProfilePage = () => {
     const profileImage = session?.user?.image;
     const profileName = session?.user?.name;
     const profileEmail = session?.user?.email;
+
+
 
     return (
         <section className="bg-blue-50">
