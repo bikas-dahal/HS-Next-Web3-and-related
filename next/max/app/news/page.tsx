@@ -1,29 +1,14 @@
-import Link from "next/link";
+
+import { DUMMY_NEWS } from "@/dummy-news";
+import NewsList from "@/components/news-list";
 
 const NewsPage = () => {
+
     return (
-        <>
-            <div className='flex items-center justify-evenly text-cyan-400'>
 
-            <Link href='/news/recently-added/'>
-                Recent News
-            </Link>
-                <ul>
-                    <li className='flex flex-col items-center justify-center gap-5'>
-
-                <Link href='/news/ktm-npl'>
-                News abobut ktm npl
-                </Link>
-                    </li>
-                    <li className='flex flex-col items-center justify-center gap-5'>
-                        <Link href='/news/ktm-npl'>
-                            News abobut ktm npl
-                        </Link>
-                    </li>
-                </ul>
+            <div className='text-cyan-400'>
+                <NewsList news={DUMMY_NEWS} />
             </div>
-            This will provide news here
-        </>
     )
 }
 
