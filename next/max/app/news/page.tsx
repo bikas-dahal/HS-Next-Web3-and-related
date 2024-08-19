@@ -1,13 +1,21 @@
 
-import { DUMMY_NEWS } from "@/dummy-news";
-import NewsList from "@/components/news-list";
 
-const NewsPage = () => {
+import NewsList from "@/components/news-list";
+import {useEffect, useState} from "react";
+
+const NewsPage = async () => {
+    const response = await fetch("http://localhost:8080/news");
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch news list.');
+    }
+
+    const news = await response.json()
 
     return (
 
             <div className='text-cyan-400'>
-                <NewsList news={DUMMY_NEWS} />
+                <NewsList news={news} />
             </div>
     )
 }
