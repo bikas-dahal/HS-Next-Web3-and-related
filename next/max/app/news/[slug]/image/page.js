@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {DUMMY_NEWS} from "../../../../dummy-news";
+import {DUMMY_NEWS} from "@/dummy-news";
 import {notFound} from "next/navigation";
 
 export default function ImagePage({params}) {
@@ -12,7 +12,14 @@ export default function ImagePage({params}) {
 
     return (
         <div>
-            <Image src={`/images/news/${newsItem.image }`} alt={newsItem.title} width={500} height={500} />
+            <Image
+                src={`/images/news/${newsItem.image }`}
+                alt={newsItem.title}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: 'auto', height: '100%' }}
+            />
         </div>
     )
 }
