@@ -21,7 +21,7 @@ export default function RootLayout({
     return (
     <html lang="en">
       <body className={inter.className}>
-      <Header isLoggedIn={isLoggedIn} user={user} />
+      <Header />
         {children}
       </body>
     </html>

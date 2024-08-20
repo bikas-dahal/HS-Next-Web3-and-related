@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
 interface HeaderProps {
-    isLoggedIn: boolean;
-    user: {
-        name: string;
+    isLoggedIn?: boolean;
+    user?: {
+        name?: string;
         // Add other user properties as needed
     };
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, user }) => {
+const Header: React.FC<HeaderProps> = () => {
     return (
         <div>
             Header
         </div>
-    )
+    );
 }
 
-export default Header
+export default Header;
