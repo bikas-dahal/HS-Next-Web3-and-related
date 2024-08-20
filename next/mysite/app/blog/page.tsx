@@ -10,7 +10,7 @@ const Blog = () => {
                 hello see you
             </p>
             <div>
-                let's go
+                lets go
             </div>
         </div>
 
