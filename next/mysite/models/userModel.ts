@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
     googleId: {
         type: String,
     },
+    image: {
+        type: String
+    }
     // isVerified: {
     //     type: Boolean,
     //     default: false,
