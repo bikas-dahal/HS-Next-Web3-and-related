@@ -4,9 +4,25 @@ import { Button } from "@/components/ui/button";
 import { Alert } from 'flowbite-react'
 import Header from '@/components/Header'
 import Cards from '@/components/Cards'
+import {auth} from "@/auth";
+import {cookies} from "next/headers";
+import {decode} from "@auth/core/jwt";
 
-export default function Home() {
+
+export default async function Home() {
+
+    const cokks = cookies().get('authjs.session-token')
+    console.log(
+        await decode({
+            token: cokks?.value,
+            salt: cokks?.name,
+            secret: process.env.AUTH_SECRET
+        })
+    )
+
     console.log(process.env.HI)
+    const session = await auth()
+    console.log('Session', session)
   return (
       <div className='pt-20'>
           <Cards/>

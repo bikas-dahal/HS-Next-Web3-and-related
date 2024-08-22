@@ -1,9 +1,10 @@
-import NextAuth, {CredentialsSignin} from "next-auth"
+import NextAuth, {AuthError, CredentialsSignin} from "next-auth"
 import Google from "next-auth/providers/google"
 import credentialProvider from "next-auth/providers/credentials";
 import {type} from "node:os";
 import {User} from "@/models/userModel";
 import {compare} from 'bcryptjs'
+import {dbConnect} from "@/lib/utils";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
     providers: [
@@ -33,20 +34,29 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     })
                 }
 
+                // Connection to db
+                await dbConnect()
+
                 const user = await User.findOne({email}).select('+password')
 
                 if (!user) {
-                    throw new CredentialsSignin('Invalid email or password')
+                    throw new CredentialsSignin({
+                        cause: 'Please provide all required credentials.',
+                    })
                 }
 
                 if (!password) {
-                    throw new CredentialsSignin('Invalid email or password.')
+                    throw new CredentialsSignin({
+                        cause: 'Please provide all required credentials.',
+                    })
                 }
 
                 const isMatch = await compare(password, user.password)
 
                 if (!isMatch) {
-                    throw new CredentialsSignin('Invalid password')
+                    throw new CredentialsSignin({
+                        cause: 'Email or password is not correct.'
+                    })
                 }
 
                 return {
@@ -57,4 +67,30 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             }
         })
     ],
+    pages: {
+        signIn: '/login'
+    },
+    callbacks: {
+        signIn: async ({ user, account }) => {
+            if ( account?.provider === 'credentials') return true
+            if (account?.provider === 'google'){
+                try {
+                    const { email, name, image, id} = user
+                    await dbConnect()
+
+                    const userExists = await User.findOne({email})
+
+                    if (!userExists) {
+                        await User.create({email, name, image, googleId: id})
+                    }
+
+                    return true
+                } catch (e) {
+                    throw new AuthError('Error while creating a user.')
+                }
+            } {
+                return false
+            }
+        }
+    }
 })
