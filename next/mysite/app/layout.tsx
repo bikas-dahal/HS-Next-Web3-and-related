@@ -20,10 +20,14 @@ export default function RootLayout({
 }>) {
     const isLoggedIn = false; // Replace with your actual logic
     const user = { imageUrl: '' };
+
     return (
     <html lang="en">
       <body className={inter.className}>
+      <nav>
+
       <Header />
+      </nav>
         {children}
         <Toaster />
       </body>

@@ -17,6 +17,7 @@
     "flowbite": "^2.5.1",
     "flowbite-react": "^0.10.1",
     "lucide-react": "^0.427.0",
+    "mongoose": "^8.5.4",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "next-themes": "^0.3.0",

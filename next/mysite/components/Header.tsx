@@ -1,19 +1,20 @@
-'use client';
+// components/Navbar.tsx
+'use client'
+import React, { useState } from 'react';
+import Link from 'next/link';
+// import { useSession, signOut } from 'next-auth/react';
+import { getSession } from "@/actions/getUser";
 
-interface HeaderProps {
-    isLoggedIn?: boolean;
-    user?: {
-        name?: string;
-        // Add other user properties as needed
-    };
-}
 
-const Header: React.FC<HeaderProps> = () => {
+const Navbar: React.FC = () => {
+
     return (
-        <div>
-            Header
-        </div>
-    );
-}
 
-export default Header;
+        <nav className="bg-gray-800 p-4">
+            {/*{user}*/}
+            hi
+        </nav>
+    );
+};
+
+export default Navbar;

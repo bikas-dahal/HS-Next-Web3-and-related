@@ -19,11 +19,11 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String
+    },
+    isVerified: {
+        type: Boolean,
+        default: false,
     }
-    // isVerified: {
-    //     type: Boolean,
-    //     default: false,
-    // }
 })
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema);
