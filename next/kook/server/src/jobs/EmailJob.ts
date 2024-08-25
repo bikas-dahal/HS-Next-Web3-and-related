@@ -15,10 +15,11 @@ export const emailQueue = new Queue(emailQueueName, {
     defaultJobOptions,
 })
 
+// worker
 export const queueWorker = new Worker(emailQueueName, async (job:Job) => {
     const data:EmailJobDataType = job.data
     await sendEmail(data.to, data.subject, data.body)
-    console.log('Job data is', data)
+    // console.log('Job data is', data)
 }, {
     connection: redisConnection
 })

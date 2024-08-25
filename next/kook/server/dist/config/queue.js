@@ -1,6 +1,7 @@
 export const redisConnection = {
     host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT, 10),
+    port: 13570,
+    // port: parseInt(process.env.REDIS_PORT, 10),
     username: 'default',
     password: process.env.REDIS_PASSWORD,
 };

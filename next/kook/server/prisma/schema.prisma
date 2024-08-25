@@ -4,6 +4,8 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// npx prisma migrate dev --name user_table
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,7 +19,7 @@ model User {
   id Int @id @default(autoincrement())
   name String @db.VarChar(191)
   email String @unique
-  password String
+  password String?
   image String?
   googleId String?
   password_reset_token String?
