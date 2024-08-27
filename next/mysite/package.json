@@ -16,6 +16,7 @@
     "clsx": "^2.1.1",
     "flowbite": "^2.5.1",
     "flowbite-react": "^0.10.1",
+    "framer-motion": "^11.3.30",
     "lucide-react": "^0.427.0",
     "mongoose": "^8.5.4",
     "next": "14.2.5",

@@ -1,13 +1,16 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import tailwindcssAnimate from "tailwindcss-animate";
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    './actions/**/*.{ts,tsx}',
+  ],
   prefix: "",
   theme: {
     container: {
@@ -59,6 +62,11 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -69,12 +77,25 @@ const config = {
         },
       },
       animation: {
+        scroll:
+            "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [tailwindcssAnimate, addVariablesForColors],
+};
 
-export default config
+function addVariablesForColors({ addBase, theme }: { addBase: Function, theme: Function }) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+      Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+
+export default config;

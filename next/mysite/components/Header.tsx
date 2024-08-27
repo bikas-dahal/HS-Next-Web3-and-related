@@ -2,19 +2,17 @@
 'use client'
 import React, { useState } from 'react';
 import Link from 'next/link';
-// import { useSession, signOut } from 'next-auth/react';
-import { getSession } from "@/actions/getUser";
-
+import { useSession, SessionProvider } from 'next-auth/react';
 
 const Navbar: React.FC = () => {
+    const session = useSession();
+    console.log(session)
 
     return (
-
-        <nav className="bg-gray-800 p-4">
-            {/*{user}*/}
-            hi
-        </nav>
-    );
-};
+        <SessionProvider>
+            <p>Welcome {session?.user?.name}</p>
+        </SessionProvider>
+    )
+}
 
 export default Navbar;
