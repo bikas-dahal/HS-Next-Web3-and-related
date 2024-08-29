@@ -1,7 +1,31 @@
-import mongoose, {mongo} from 'mongoose';
+import mongoose, {Schema, Document} from 'mongoose';
 
-const userSchema = new mongoose.Schema({
-    name: {
+
+export interface Message extends Document{
+    content: string;
+    createdAt: Date;
+}
+
+const MessageSchema: Schema<Message> = new Schema({
+    content: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
+
+export interface User extends Document{
+    username: string,
+    email: string,
+    password: string,
+    verifyCode: string,
+    verifyCodeExpiry: Date;
+    isAcceptingMessage: boolean,
+    googleId: string,
+    image: string,
+    isVerified: boolean,
+    messages: Message[]
+}
+
+const userSchema: Schema<User> = new mongoose.Schema({
+    username: {
         type: String,
         required: true,
     },
@@ -23,7 +47,22 @@ const userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false,
-    }
+    },
+    verifyCode: {
+        type: String,
+        required: [true, 'Verify code is required'],
+    },
+    verifyCodeExpiry: {
+        type: Date,
+        required: [true, 'Verify code expiry is required'],
+    },
+    isAcceptingMessage: {
+        type: Boolean,
+        default: true
+    },
+    messages: [MessageSchema]
 })
 
-export const User = mongoose.models?.User || mongoose.model('User', userSchema);
+const User = mongoose.models?.User as mongoose.Model<User> || mongoose.model<User>('User', userSchema);
+
+export default User

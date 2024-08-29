@@ -2,7 +2,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-import {User} from "@/models/userModel";
+import User from "@/models/userModel";
 import { hash } from "bcryptjs";
 import {redirect} from "next/navigation";
 import {dbConnect} from "@/lib/utils";

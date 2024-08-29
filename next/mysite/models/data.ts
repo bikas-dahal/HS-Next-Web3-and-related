@@ -1,3 +1,10 @@
+// import bcrypt from "bcryptjs";
+//
+// const a = '123'
+// const b = await bcrypt.hash(a, 10)
+// console.log(b)
+
+
 export
 const Gyan = [
     {
