@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-email/components": "^0.0.23",
     "@tabler/icons-react": "^3.14.0",
@@ -29,6 +31,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-email": "^3.0.1",
+    "react-hook-form": "^7.53.0",
     "resend": "^4.0.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
