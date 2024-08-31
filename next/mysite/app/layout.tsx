@@ -3,11 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/toaster"
+
 
 // import {SessionProvider} from "next-auth/react";
 import {SidebarDemo} from "@/components/SideBarCheck";
 import AuthProvider from "@/context/AuthProvider";
+import Navbar from "@/components/Navbar";
 
 
 
@@ -32,13 +34,15 @@ export default async function RootLayout({
 
     return (
     <html lang="en">
-    <AuthProvider>
 
       <body className={inter.className}>
+      <AuthProvider>
+        <Navbar />
+
         {children}
         <Toaster />
-      </body>
     </AuthProvider>
+      </body>
     </html>
   );
 }

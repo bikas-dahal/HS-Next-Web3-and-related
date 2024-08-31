@@ -1,65 +1,61 @@
 import dbConnect from "@/lib/dbConnect";
-import User from '@/models/userModel'
+import User from '@/models/userModel';
 import bcrypt from "bcryptjs";
-import {sendVerificationEmail} from "@/helpers/sendVerificationEmail";
+import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 
 export async function POST(req: Request) {
-    await dbConnect()
+    await dbConnect();
 
     try {
-        const { username, email, password } = await req.json()
+        const { username, email, password } = await req.json() as { username: string, email: string, password: string };
         console.log('Parsed request body:', { username, email, password });
+
+        // Check for existing user with the same username
         const existingUserVerifiedByUsername = await User.findOne({
             username,
             isVerified: true,
         });
-        console.log('No existing user')
-
 
         if (existingUserVerifiedByUsername) {
-            return Response.json(
-                {
-                    success: false,
-                    message: "Username already exists",
-                },
-                {
-                    status: 409,
+            return new Response(JSON.stringify({
+                success: false,
+                message: "Username already exists",
+            }), {
+                status: 409,
+                headers: {
+                    'Content-Type': 'application/json',
                 }
-            );
+            });
         }
 
-        console.log('no username')
-
+        // Check for existing user with the same email
         const existingUserByEmail = await User.findOne({ email }).select('+password');
-        const verifyCode = Math.floor(100000 + Math.random() * 90000).toString()
-
-        console.log(verifyCode)
-        console.log(existingUserByEmail)
+        const verifyCode = Math.floor(100000 + Math.random() * 90000).toString();
+        console.log('Generated verify code:', verifyCode);
 
         if (existingUserByEmail) {
-            console.log('email existing')
             if (existingUserByEmail.isVerified) {
-                // console.log('existingUserByEmail')
-                return Response.json({
+                return new Response(JSON.stringify({
                     success: false,
-                    message: 'Email already used'
-                }, {
+                    message: 'Email already used',
+                }), {
                     status: 400,
-                })
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
             } else {
-                existingUserByEmail.password = await bcrypt.hash(password, 10)
-                existingUserByEmail.verifyCode = verifyCode
-                existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000)
-                await existingUserByEmail.save()
-                // console.log('existing user')
+                // Update the unverified existing user with a new password and verification code
+                existingUserByEmail.password = await bcrypt.hash(password, 10);
+                existingUserByEmail.verifyCode = verifyCode;
+                existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
+                await existingUserByEmail.save();
             }
         } else {
-            console.log('no user')
-            console.log(password)
-            const hashedPassword = await bcrypt.hash(password, 10)
-            console.log('Password hashed', hashedPassword)
-            const expiryDate = new Date()
-            expiryDate.setHours(expiryDate.getHours() + 1)
+            // If no existing user, create a new user
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const expiryDate = new Date();
+            expiryDate.setHours(expiryDate.getHours() + 1);
 
             const newUser = new User({
                 username,
@@ -70,47 +66,47 @@ export async function POST(req: Request) {
                 isAcceptingMessage: true,
                 messages: [],
                 isVerified: false,
-            })
+            });
 
-            await newUser.save()
+            await newUser.save();
         }
 
         // Send verification email
-
-        const emailResponse = await sendVerificationEmail(
-            email,
-            username,
-            verifyCode
-        )
+        const emailResponse = await sendVerificationEmail(email, username, verifyCode);
 
         if (!emailResponse.success) {
-            return Response.json({
+            return new Response(JSON.stringify({
                 success: false,
-                message: emailResponse.message
-            }, {
+                message: emailResponse.message,
+            }), {
                 status: 409,
-            })
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
         }
 
-        return Response.json({
+        return new Response(JSON.stringify({
             success: true,
             message: 'User registered successfully, please verify your email',
-        }, {
+        }), {
             status: 201,
-        })
-
-
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
 
     } catch (error) {
-        console.log('last ko')
-        return Response.json({
+        console.error('Error registering user:', error);
+        return new Response(JSON.stringify({
             success: false,
             message: 'Error registering user internal error',
-            error
-            },
-            {
-                status: 500
+            error: error instanceof Error ? error.message : 'Unknown error',
+        }), {
+            status: 500,
+            headers: {
+                'Content-Type': 'application/json',
             }
-        )
+        });
     }
 }
