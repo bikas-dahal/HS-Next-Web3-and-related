@@ -5,8 +5,7 @@
 // console.log(b)
 
 
-export
-const Gyan = [
+export const Gyan = [
     {
         quote: "The greatest fear in the world is of the opinions of others. The moment you are unafraid of the crowd you are no longer a sheep, you become a lion. A great roar arises in your heart, the roar of freedom.",
         name: "Osho",

@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster"
 
 
-// import {SessionProvider} from "next-auth/react";
+import {SessionProvider} from "next-auth/react";
 import {SidebarDemo} from "@/components/SideBarCheck";
 import AuthProvider from "@/context/AuthProvider";
 import Navbar from "@/components/Navbar";
@@ -37,6 +37,7 @@ export default async function RootLayout({
 
       <body className={inter.className}>
       <AuthProvider>
+
         <Navbar />
 
         {children}

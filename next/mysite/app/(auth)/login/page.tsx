@@ -17,10 +17,11 @@ import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Form
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Loader2} from "lucide-react";
-import {signIn} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 
 
 const LoginPage = () => {
+    const { data: session, status } = useSession();
     const router = useRouter();
     const {toast} = useToast();
 
@@ -34,6 +35,15 @@ const LoginPage = () => {
         // }
     })
 
+    useEffect(() => {
+        if (status === "authenticated") {
+            // Redirect to home page if user is authenticated
+            router.push("/");
+        }
+    }, [status, router]);
+
+
+
     const onSubmit = async (data: z.infer<typeof signInSchema>) => {
         setIsSubmitting(true);
 
@@ -42,20 +52,27 @@ const LoginPage = () => {
             email: data.email,
             password: data.password
         })
+        console.log('Result is', result)
         if (result?.error) {
             toast({
                 title: 'Error',
-                description: "invalid credentials",
+                description: "Invalid credentials",
                 variant: 'destructive'
             })
         }
 
         if (result?.url) {
-            router.replace('/blog');
+            router.replace('/');
 
         }
         setIsSubmitting(false)
     }
+
+    // if (status === "loading") {
+    //     // You can return a loading spinner here
+    //     return <div><Loader2 className='animate-spin' /> </div>;
+    // }
+
 
     return(
         <div className='flex justify-center items-center min-h-screen bg-gray-100'>

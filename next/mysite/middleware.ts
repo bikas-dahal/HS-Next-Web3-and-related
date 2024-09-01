@@ -1,29 +1,41 @@
-import { NextRequest,NextResponse } from "next/server";
-import {getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export { default } from 'next-auth/middleware'
-//
 export async function middleware(req: NextRequest) {
-    const token = await getToken({req})
-    const url = req.nextUrl
+    const token = await getToken({ req });
+    const url = req.nextUrl;
 
+    console.log(url.pathname);
+
+    // If user is authenticated (has a token) and tries to access login or signup, redirect to home page
     if (token && (
-        url.pathname.startsWith('/login') ||
-        url.pathname.startsWith('/sign-up') ||
-        url.pathname.startsWith('/verify') ||
-        url.pathname.startsWith('/')
+        url.pathname === '/login' ||
+        url.pathname === '/signup' ||
+        url.pathname.startsWith('/verify')
     )) {
-
-        return NextResponse.redirect(new URL('/blog', req.url))
-    }
-    if (!token && url.pathname.startsWith('/blog')) {
-        return NextResponse.redirect(new URL('/login', req.url))
+        return NextResponse.redirect(new URL('/', req.url));
     }
 
-    return NextResponse.next()
+    // If user is not authenticated and tries to access protected routes, redirect to login page
+    if (!token && (
+        url.pathname.startsWith('/blog')
+        // url.pathname.startsWith('/dashboard')
+    )) {
+        return NextResponse.redirect(new URL('/login', req.url));
+    }
 
+    // Allow access if none of the conditions match
+    return NextResponse.next();
 }
-    export const config = {
-        matcher: ['/login', '/sign-up', '/', '/dashboard/:path*','/blog', '/verify/:path*']
-    }
 
+// Define the routes that the middleware should apply to
+export const config = {
+    matcher: [
+        '/login',
+        '/signup',
+        '/verify/:path*',
+        '/',
+        '/dashboard/:path*',
+        '/blog',
+    ],
+};

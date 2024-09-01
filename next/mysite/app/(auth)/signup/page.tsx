@@ -1,33 +1,33 @@
 'use client'
-//
-
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm} from "react-hook-form";
-import * as z  from 'zod'
+import { useForm } from "react-hook-form";
+import * as z from 'zod';
 import Link from "next/link";
-import {useEffect, useState} from "react";
-import { useDebounceValue, useDebounceCallback } from "usehooks-ts";
-import { useToast} from "@/components/ui/use-toast";
-import {useRouter} from "next/navigation";
-import {signUpSchema} from "@/schemas/signUpSchema";
-import axios, {AxiosError} from "axios";
-import {ApiResponse} from "@/types/apiResponse";
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {Loader2} from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDebounceCallback } from "usehooks-ts";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { signUpSchema } from "@/schemas/signUpSchema";
+import axios, { AxiosError } from "axios";
+import { ApiResponse } from "@/types/apiResponse";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+import {useSession} from "next-auth/react";
 
-const page = () => {
 
+const SignupPage = () => {
+    const { data: session, status } = useSession()
     const [username, setUsername] = useState("");
     const [usernameMessage, setUsernameMessage] = useState("");
     const [isCheckingUsername, setIsCheckingUsername] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const debounced = useDebounceCallback(setUsername, 400);
-    const {toast} = useToast();
-    const router  = useRouter();
+    const { toast } = useToast();
+    const router = useRouter();
 
     // Zod implementation
     const form = useForm<z.infer<typeof signUpSchema>>({
@@ -37,60 +37,63 @@ const page = () => {
             email: '',
             password: ''
         }
+    });
 
-    })
+    useEffect(() => {
+        if (status === "authenticated") {
+            // Redirect to home page if user is authenticated
+            router.push("/");
+        }
+    }, [status, router]);
+
 
     useEffect(() => {
         const checkUsernameUnique = async () => {
             if (username) {
                 setIsCheckingUsername(true);
-                setUsernameMessage('')
+                setUsernameMessage('');
 
                 try {
-                    const response = await axios.get(`/api/check_username?username=${username}`)
-                    setUsernameMessage(response.data.message)
+                    const response = await axios.get(`/api/check_username?username=${username}`);
+                    setUsernameMessage(response.data.message);
                 } catch (err) {
                     const axiosError = err as AxiosError<ApiResponse>;
-                    setUsernameMessage(
-                        axiosError.response?.data.message ?? 'Username cannot be check now'
-                    )
-
+                    setUsernameMessage(axiosError.response?.data.message ?? 'Username cannot be checked now');
                 } finally {
                     setIsCheckingUsername(false);
                 }
             }
-        }
+        };
 
-        checkUsernameUnique()
-    }, [username])
+        checkUsernameUnique();
+    }, [username]);
 
     const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
         setIsSubmitting(true);
         try {
-            const response = await axios.post(`/api/sign-up`, data)
+            const response = await axios.post(`/api/sign-up`, data);
 
             toast({
                 title: 'Success',
                 description: response.data.message,
-            })
+            });
 
-            router.replace(`verify/${username}`)
-            setIsSubmitting(false);
-
+            router.replace(`/verify/${username}`);
         } catch (err) {
-            console.error('Error in sign up', err)
+            console.error('Error in sign up', err);
             const axiosError = err as AxiosError<ApiResponse>;
             let errorMessage = axiosError.response?.data.message;
             toast({
                 title: 'Error',
                 description: errorMessage,
                 variant: 'destructive'
-            })
+            });
+        } finally {
             setIsSubmitting(false);
         }
-    }
+    };
 
-    return(
+    return (
         <div className='flex justify-center items-center min-h-screen bg-gray-100'>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -102,11 +105,11 @@ const page = () => {
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
                                     <Input placeholder="username" {...field} onChange={(e) => {
-                                        field.onChange(e)
-                                        debounced(e.target.value)
+                                        field.onChange(e);
+                                        debounced(e.target.value);
                                     }} />
                                 </FormControl>
-                                    {isCheckingUsername && <Loader2 className='animate-spin' /> }
+                                {isCheckingUsername && <Loader2 className='animate-spin' />}
                                 <p>{usernameMessage}</p>
                                 <FormMessage />
                             </FormItem>
@@ -119,7 +122,7 @@ const page = () => {
                             <FormItem>
                                 <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input type='email' placeholder="email" {...field}  />
+                                    <Input type='email' placeholder="email" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -132,7 +135,7 @@ const page = () => {
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <Input type='password' placeholder="Passoword" {...field}  />
+                                    <Input type='password' placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -146,19 +149,16 @@ const page = () => {
                         ) : 'Signup'}
                     </Button>
                 </form>
-
             </Form>
             <div>
                 Already have an account?
                 <Link href='/login' className='text-blue-500 hover:text-blue-900'>Login</Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default page
-
-
+export default SignupPage;
 
 
 
