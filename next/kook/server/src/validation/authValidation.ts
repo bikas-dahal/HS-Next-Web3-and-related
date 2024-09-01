@@ -8,3 +8,9 @@ export const registerSchema = z.object({
 }).refine((data) => data && data.password === data.confirm_password, {
     message: "Password doesn't match", path:['confirm_password']
 })
+
+// Login Schema
+export const loginSchema = z.object({
+    email: z.string({message: 'Email is required'}).email({message: 'Enter a valid email address'}),
+    password: z.string({message: 'Password is required'})
+})

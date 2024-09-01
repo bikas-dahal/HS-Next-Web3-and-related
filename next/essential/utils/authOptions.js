@@ -40,7 +40,7 @@ const authOptions = {
 
                 return true;
             } catch (error) {
-                console.error("Error during sign-in:", error);
+                console.error("Error during sign-up:", error);
                 return false;
             }
         },

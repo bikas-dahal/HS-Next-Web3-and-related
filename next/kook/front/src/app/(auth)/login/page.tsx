@@ -1,7 +1,7 @@
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+
 import Link from "next/link";
+import {SubmitButton} from "@/components/common/submitBtn";
+import Login from "@/components/auth/Login";
 
 const LoginPage = () => {
     return (
@@ -9,25 +9,9 @@ const LoginPage = () => {
             <div className='w-[550px] bg-white rounded-xl shadow-md p-5'>
                 <h1 className='text-3xl text-center bg-gradient-to-r from-pink-500 to-purple-700 text-transparent bg-clip-text font-bold'>Kook</h1>
                 <h1 className='text-xl font-bold'>Login</h1>
-                <form>
-                    <div className='mt-3'>
-                        <Label htmlFor='email'>Email</Label>
-                        <Input id='email' type='email' name='email' placeholder='Enter your email...'/>
-                    </div>
-                    <div className='mt-3'>
-                        <Label htmlFor='password'>Password</Label>
-                        <Input id='password' name='password' type='password' placeholder='Password here...'/>
-                    </div>
-                    <div className='text-right m-2'>
-
-                    <Link href='/forgot-password' className='bg-slate-100 hover:text-sky-900 hover:bg-white m-2 rounded p-1'>Forget Password?</Link>
-                    </div>
-                    <div className='mt-3'>
-                        <Button className='w-full'>Login</Button>
-                    </div>
-                </form>
+                    <Login />
                 <div className='m-2'>
-                    Don't have an account? <Button className='h-8 m-0 p-2' variant='outline'><Link href='/register' className='font-bold '>Register</Link></Button>
+                    Don't have an account? <Link href='/register'  className='font-bold '><SubmitButton  text={'Register'} /></Link>
                 </div>
             </div>
         </div>

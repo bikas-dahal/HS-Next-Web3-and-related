@@ -188,7 +188,7 @@ declare interface PlaidLinkProps {
 // };
 
 declare interface AuthFormProps {
-  type: "sign-in" | "sign-up";
+  type: "sign-up" | "sign-up";
 }
 
 declare interface BankDropdownProps {

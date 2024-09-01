@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": ["src", "src/custom-types.d.ts"],
     "outDir": "dist",
     "lib": ["es2020"],
     "target": "ES2020",
