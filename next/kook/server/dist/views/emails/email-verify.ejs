@@ -1,0 +1,13 @@
+<html>
+<%- include('../partials/head') %>
+<body>
+<div class="container">
+    <h1>Hello, <span class="highlight"><%= name %></span>!</h1>
+    <p>Good to see you. Please verify your email by clicking the button below:</p>
+    <a href="<%= url %>" target="_blank" class="button">Verify Your Email</a>
+    <p>If the button above doesn't work, you can use the following link:</p>
+    <p><a href="<%= url %>" target="_blank" class="link-text"><%= url %></a></p>
+</div>
+<%- include('../partials/footer') %>
+</body>
+</html>
