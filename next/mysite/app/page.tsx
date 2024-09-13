@@ -8,7 +8,7 @@ import Header from '@/components/Header'
 import Cards from '@/components/Cards'
 
 import {cookies} from "next/headers";
-import {decode} from "@auth/core/jwt";
+import {decode} from "@(auth)/core/jwt";
 import {InfiniteMovingCards} from "@/components/ui/infinite-moving-cards";
 import {Gyan} from "@/models/data.ts";
 import {main} from "@popperjs/core";
@@ -93,7 +93,7 @@ export default function Home() {
 //         </footer>
 //     </>
 // )
-// const session = await auth()
+// const session = await (auth)()
 // const user = (session?.user?.name)
 // console.log('session', session)
 

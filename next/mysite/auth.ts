@@ -1,6 +1,6 @@
-// import NextAuth, {AuthError, CredentialsSignin} from "next-auth"
-// import Google from "next-auth/providers/google"
-// import credentialProvider from "next-auth/providers/credentials";
+// import NextAuth, {AuthError, CredentialsSignin} from "next-(auth)"
+// import Google from "next-(auth)/providers/google"
+// import credentialProvider from "next-(auth)/providers/credentials";
 // import User from "@/models/userModel"; //
 // import bcrypt from 'bcryptjs'
 // // import { createUser, findUserByEmail, findUserById } from '@/models/user';
@@ -10,7 +10,7 @@
 //     code = "Invalid identifier or password"
 // }
 //
-// export const { auth, handlers, signIn, signOut } = NextAuth({
+// export const { (auth), handlers, signIn, signOut } = NextAuth({
 //     providers: [
 //         Google({
 //             clientId: process.env.GOOGLE_CLIENT_ID,

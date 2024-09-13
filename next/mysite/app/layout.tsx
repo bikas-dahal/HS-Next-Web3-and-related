@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster"
 
 
-import {SessionProvider} from "next-auth/react";
+import {SessionProvider} from "next-(auth)/react";
 import {SidebarDemo} from "@/components/SideBarCheck";
 import AuthProvider from "@/context/AuthProvider";
 import Navbar from "@/components/Navbar";
@@ -25,7 +25,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-    // const session = await auth()
+    // const session = await (auth)()
     // console.log('Session:', session); // Debugging statement
     // const userId = session?.user?.id || 'Guest'; // Fallback to 'Guest' or similar
     // console.log(userId)

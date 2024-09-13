@@ -1,8 +1,8 @@
-import {getServerSession} from "next-auth";
+import {getServerSession} from "next-(auth)";
 import {authOptions} from "@/app/api/auth/[...nextauth]/options";
 import dbConnect from '@/lib/dbConnect'
 import MyUser from '@/models/userModel'
-import  { User } from 'next-auth';
+import  { User } from 'next-(auth)';
 import cards from "@/components/Cards";
 
 export async function POST(req: Request, res: Response) {

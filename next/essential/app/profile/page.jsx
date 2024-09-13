@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession } from "next-(auth)/react";
 import profileDefault from '@/assets/images/profile.png'
 import  { useEffect, useState} from "react";
 

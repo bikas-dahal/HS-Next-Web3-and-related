@@ -1,7 +1,7 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property"
 import { getSessionUser } from "@/utils/getSessionUser";
-// import { session } from "next-auth/core/routes";
+// import { session } from "next-(auth)/core/routes";
 import cloudinary from "@/config/cloudinary";
 
 export const GET = async (request) => {

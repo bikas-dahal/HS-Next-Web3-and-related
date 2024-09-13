@@ -17,7 +17,7 @@ import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Form
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Loader2} from "lucide-react";
-import {signIn, useSession} from "next-auth/react";
+import {signIn, useSession} from "next-(auth)/react";
 
 
 const LoginPage = () => {
@@ -137,9 +137,9 @@ export default LoginPage
 // } from "@/components/ui/card"
 // import { Button } from "@/components/ui/button"
 // import Link from "next/link";
-// // import {auth, signIn} from "@/auth";
+// // import {(auth), signIn} from "@/(auth)";
 // import LoginForm from "@/components/client/form";
-// import {signIn, signOut, useSession} from "next-auth/react";
+// import {signIn, signOut, useSession} from "next-(auth)/react";
 // import {redirect} from "next/navigation";
 //
 // export default function Component() {
@@ -165,7 +165,7 @@ export default LoginPage
 //
 // const LoginPage = async () => {
 //     'use server'
-//     // const session = await auth()
+//     // const session = await (auth)()
 //     // if (session?.user) {
 //     //     redirect('/')
 //     // }
