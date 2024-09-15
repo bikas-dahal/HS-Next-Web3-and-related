@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb01519c-d377-4fe5-91ee-158404ffac55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/next/all_about_auth/components/form-error.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/next/all_about_auth/components/form-success.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next/all_about_auth/actions/login.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next/all_about_auth/actions/register.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next/all_about_auth/lib/db.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/all_about_auth/components/auth/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/components/auth/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/components/auth/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/components/auth/register-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/all_about_auth/schemas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/schemas/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistMonoVF.woff" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistVF.woff" beforeDir="false" />
@@ -24,9 +33,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/next/all_about_auth" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -35,23 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/HS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\HS\\next\\musq\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/HS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\HS\\next\\musq\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -89,6 +109,8 @@
       <workItem from="1726157041639" duration="1404000" />
       <workItem from="1726158762983" duration="966000" />
       <workItem from="1726231555413" duration="8486000" />
+      <workItem from="1726321610704" duration="1191000" />
+      <workItem from="1726395526885" duration="5665000" />
     </task>
     <servers />
   </component>
