@@ -8,7 +8,6 @@
       <change afterPath="$PROJECT_DIR$/next/all_about_auth/actions/login.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/next/all_about_auth/actions/register.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/next/all_about_auth/lib/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/all_about_auth" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/all_about_auth/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/all_about_auth/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/all_about_auth/app/layout.tsx" afterDir="false" />
@@ -110,7 +109,7 @@
       <workItem from="1726158762983" duration="966000" />
       <workItem from="1726231555413" duration="8486000" />
       <workItem from="1726321610704" duration="1191000" />
-      <workItem from="1726395526885" duration="5665000" />
+      <workItem from="1726395526885" duration="5991000" />
     </task>
     <servers />
   </component>
