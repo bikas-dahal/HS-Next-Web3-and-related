@@ -51,7 +51,7 @@ export function RegisterForm() {
             headerLabel={"Let's start our journey"}
             hlabel={'🙏 Register'}
             backButtonLabel={"Already have an account"}
-            backButtonHref={'/login'}
+            backButtonHref={'/auth/login'}
             showSocial={true}
         >
             <Form {...form}>

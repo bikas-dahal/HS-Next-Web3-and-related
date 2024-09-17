@@ -13,13 +13,33 @@ export default auth((req) => {
     const { nextUrl } = req;
 
 
+    // console.log('cc', nextUrl)
+
     const isLoggedIn = !!req.auth
+
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
     const ispublicRoutes = publicRoutes.includes(nextUrl.pathname);
     const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
-    console.log(isLoggedIn)
-    console.log('check', req.nextUrl.pathname);
+
+    if (isApiAuthRoute) {
+        return null
+    }
+
+    if (isAuthRoutes) {
+        if (isLoggedIn) {
+            return Response.redirect(DEFAULT_LOGIN_REDIRECT) // to create a absolute url
+        }
+
+        return null
+    }
+
+    if (!isLoggedIn && !ispublicRoutes) {
+        return Response.redirect(new URL('/auth/login', nextUrl));
+    }
+
+    return null
+
 })
 
 export const config = {
