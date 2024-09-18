@@ -2,20 +2,20 @@
 
 import React from 'react';
 import {CardWrapper} from "@/components/auth/card-wrapper";
-import { Input } from '@/components/ui/input'
+import {Input} from '@/components/ui/input'
 
 import * as z from 'zod'
 import {LoginSchema} from "@/schemas";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 
 import {Form, FormLabel, FormControl, FormMessage, FormItem, FormField} from "@/components/ui/form";
 import {Button} from "@/components/ui/button";
 import {FormError} from "@/components/form-error";
 import {FormSuccess} from "@/components/form-success";
 import {login} from "@/actions/login";
-import { useTransition } from "react";
+import {useTransition} from "react";
 
 
 export function LoginForm() {
@@ -37,6 +37,7 @@ export function LoginForm() {
         setSuccess('')
 
         startTransition(() => {
+            // fetch('api/')
             login(values)
                 .then((data) => {
                     setError(data.error)
@@ -50,7 +51,7 @@ export function LoginForm() {
             hlabel={'👋 Login'}
             headerLabel={'Welcome back'}
             backButtonLabel={"Don't have an account"}
-            backButtonHref={'/register'}
+            backButtonHref={'/auth/register'}
             showSocial={true}
         >
             <Form {...form}>
@@ -58,30 +59,32 @@ export function LoginForm() {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className={'space-y-6'}
                 >
-        <div className={'space-y-4'}>
-<FormField render={({field}) => (
-    <FormItem>
-        <FormLabel>Email</FormLabel>
-        <FormControl>
-            <Input {...field} placeholder={'ram@gmail.com'} disabled={isPending} type="email" />
-        </FormControl>
-        <FormMessage  />
-    </FormItem>
-)} name='email'
-           control={form.control} />
-            <FormField render={({field}) => (
-    <FormItem>
-        <FormLabel>Password</FormLabel>
-        <FormControl>
-            <Input {...field} disabled={isPending} placeholder={'******'} type="password" />
-        </FormControl>
-        <FormMessage />
-    </FormItem>
-)} name='password'
-           control={form.control} />
-        </div>
-                    <FormError message={error} />
-                    <FormSuccess message={success} />
+                    <div className={'space-y-4'}>
+                        <FormField render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input {...field} placeholder={'ram@gmail.com'} disabled={isPending} type="email"/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                            )}
+                                   name='email'
+                                   control={form.control}
+                        />
+                        <FormField render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input {...field} disabled={isPending} placeholder={'******'} type="password"/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )} name='password'
+                                   control={form.control}/>
+                    </div>
+                    <FormError message={error}/>
+                    <FormSuccess message={success}/>
                     <Button type="submit" color="primary" disabled={isPending} className={'w-full'}>Login</Button>
                 </form>
             </Form>

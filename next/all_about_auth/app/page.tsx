@@ -18,7 +18,7 @@ export default function Home() {
             <div>
                 <LoginButton>
 
-                <Button variant='secondary' size='lg'>Login</Button>
+                <Button variant='secondary'  size='lg'>Login</Button>
                 </LoginButton>
 
             </div>

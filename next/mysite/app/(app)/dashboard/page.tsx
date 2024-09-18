@@ -40,7 +40,7 @@ const Dashboard = () => {
             const axiosError = err as AxiosError<ApiResponse>;
             toast({
                 title: 'Error',
-                description: axiosError.response?.data.message ?? 'Error fetching message setting',
+                description: axiosError.response?.data.message ?? 'Error fetching message settings',
                 variant: 'destructive',
             });
         } finally {
@@ -92,7 +92,7 @@ const Dashboard = () => {
             const axiosError = error as AxiosError<ApiResponse>;
             toast({
                 title: 'Error',
-                description: axiosError.response?.data.message ?? 'Error toggling message setting',
+                description: axiosError.response?.data.message ?? 'Error toggling message settings',
                 variant: 'destructive',
             });
         }

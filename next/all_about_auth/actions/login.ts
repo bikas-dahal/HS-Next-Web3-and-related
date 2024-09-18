@@ -3,8 +3,8 @@
 import * as z from 'zod'
 import { LoginSchema } from "@/schemas";
 import {signIn} from "@/auth";
-import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 import {AuthError} from "next-auth";
+import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
@@ -23,11 +23,15 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         await signIn('credentials', {
             email,
             password,
-            redirectTo: '/'
+            redirectTo: DEFAULT_LOGIN_REDIRECT
         })
-    } catch (e) {
-        if (e instanceof AuthError) {
-            switch (e.type) {
+
+        return {
+            success: 'Login successful',
+        }
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
                 case "CredentialsSignin":
                     return {
                         error: 'Invalid credentials'
@@ -37,6 +41,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
             }
         }
 
-        throw e;
+        throw error;
     }
 }

@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL('/', req.url));
     }
 
-    // If user is not authenticated and tries to access protected routes, redirect to login page
+    // If user is not authenticated and tries to access (protected) routes, redirect to login page
     if (!token && (
         url.pathname.startsWith('/blog')
         // url.pathname.startsWith('/dashboard')

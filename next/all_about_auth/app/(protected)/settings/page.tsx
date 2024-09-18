@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/button";
 
 async function Page() {
     const session = await auth()
+
     return (
         <div>
             {JSON.stringify(session, null, 2)}
