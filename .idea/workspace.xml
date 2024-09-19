@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cb01519c-d377-4fe5-91ee-158404ffac55" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/chat/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistMonoVF.woff" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistVF.woff" beforeDir="false" />
@@ -16,8 +15,6 @@
       <change beforePath="$PROJECT_DIR$/next/musq/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/mysite/app/(app)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/mysite/app/(app)/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/mysite/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/mysite/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,11 +102,15 @@
       <workItem from="1726484577334" duration="939000" />
       <workItem from="1726490562504" duration="5690000" />
       <workItem from="1726551694614" duration="11412000" />
-      <workItem from="1726644314146" duration="2651000" />
+      <workItem from="1726644314146" duration="8448000" />
+      <workItem from="1726671108672" duration="6542000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
 </project>

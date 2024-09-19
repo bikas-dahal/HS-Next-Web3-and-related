@@ -1,13 +1,15 @@
 // Public routes, no routes
 
 export const publicRoutes = [
-    '/'
+    '/',
+    '/auth/providers'
 ]
 
 // Routes for auth
 export const authRoutes = [
     '/auth/login',
     '/auth/register',
+    '/auth/error',
 ]
 
 

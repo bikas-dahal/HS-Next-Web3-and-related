@@ -11,32 +11,32 @@ const { auth } = NextAuth(authConfig)
 
 export default auth((req:NextRequest)=>{
 
-    const { nextUrl } = req;
-
-    console.log('cc', nextUrl)
-
-    const isLoggedIn = !!req.auth
-
-
-    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-    const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
-    const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
-
-    if (isApiAuthRoute) {
-        return null
-    }
-
-    if (isAuthRoutes) {
-        if (isLoggedIn) {
-            return NextResponse.redirect(DEFAULT_LOGIN_REDIRECT) // to create a absolute url
-        }
-
-        return null
-    }
-
-    if (!isLoggedIn && !isPublicRoutes) {
-        return NextResponse.redirect(new URL('/auth/login', nextUrl));
-    }
+    // const { nextUrl } = req;
+    //
+    // console.log('cc', nextUrl)
+    //
+    // const isLoggedIn = !!req.auth
+    //
+    //
+    // const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+    // const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
+    // const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
+    //
+    // if (isApiAuthRoute) {
+    //     return null
+    // }
+    //
+    // if (isAuthRoutes) {
+    //     if (isLoggedIn) {
+    //         return NextResponse.redirect(DEFAULT_LOGIN_REDIRECT) // to create a absolute url
+    //     }
+    //
+    //     return null
+    // }
+    //
+    // if (!isLoggedIn && !isPublicRoutes) {
+    //     return NextResponse.redirect(new URL('/auth/login', nextUrl));
+    // }
 
     return null
 
