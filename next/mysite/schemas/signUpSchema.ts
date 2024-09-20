@@ -18,6 +18,7 @@ export const signInSchema = z.object({
 })
 
 
+
 export const verifySchema = z.object({
     code: z.string().length(6, 'Must be at least 6 characters long'),
 })

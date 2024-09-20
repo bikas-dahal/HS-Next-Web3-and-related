@@ -56,6 +56,8 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
             success: 'Login successful',
         }
     } catch (error) {
+
+        console.log('error', error);
         if (error instanceof AuthError) {
             switch (error.type) {
                 case "CredentialsSignin":
@@ -63,6 +65,8 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
                         error: 'Invalid credentials'
                     }
                     default:
+
+
                         return { error: 'Something went wrong' }
             }
         }
