@@ -15,7 +15,6 @@
       <change beforePath="$PROJECT_DIR$/next/musq/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next/musq/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/mysite/schemas/signUpSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/mysite/schemas/signUpSchema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +105,7 @@
       <workItem from="1726644314146" duration="8448000" />
       <workItem from="1726671108672" duration="6542000" />
       <workItem from="1726726382206" duration="10597000" />
+      <workItem from="1726832088493" duration="4626000" />
     </task>
     <servers />
   </component>

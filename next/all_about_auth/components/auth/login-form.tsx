@@ -24,7 +24,7 @@ export function LoginForm() {
     const searchParams = useSearchParams()
     const urlError = searchParams.get('error') === 'OAuthAccountNotLinked' ? 'Email already in use with different Provider' : ''
 
-
+    const [showTwoFactor, setShowTwoFactor] = React.useState(false);
     const [isPending, startTransition] = useTransition()
     const [error, setError] = React.useState<string | undefined>('');
     const [success, setSuccess] = React.useState<string | undefined>('');
@@ -45,8 +45,22 @@ export function LoginForm() {
             // fetch('api/')
             login(values)
                 .then((data) => {
-                    setError(data.error)
-                    setSuccess(data.success)
+                    if (data?.error) {
+                        form.reset();
+                        setError(data.error)
+                    }
+
+                    if (data?.success) {
+                        form.reset();
+                        setSuccess(data.success)
+                    }
+
+                    if (data?.twoFactor) {
+                        setShowTwoFactor(true)
+                    }
+                })
+                .catch(() => {
+                    setError('Something went wrong',);
                 })
         })
     }
@@ -65,6 +79,22 @@ export function LoginForm() {
                     className={'space-y-6'}
                 >
                     <div className={'space-y-4'}>
+                        {showTwoFactor && (
+                            <FormField render={({field}) => (
+                                <FormItem>
+                                    <FormLabel>2FA Code</FormLabel>
+                                    <FormControl>
+                                        <Input {...field} placeholder={'123123'} disabled={isPending} type="text"/>
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                                       name='code'
+                                       control={form.control}
+                            />
+                        )}
+                        {!showTwoFactor && (
+                            <>
                         <FormField render={({field}) => (
                             <FormItem>
                                 <FormLabel>Email</FormLabel>
@@ -92,10 +122,14 @@ export function LoginForm() {
                             </FormItem>
                         )} name='password'
                                    control={form.control}/>
+                            </>
+                        )}
                     </div>
                     <FormError message={error || urlError}/>
                     <FormSuccess message={success}/>
-                    <Button type="submit" color="primary" disabled={isPending} className={'w-full'}>Login</Button>
+                    <Button type="submit" color="primary" disabled={isPending} className={'w-full'}>
+                        {showTwoFactor ? 'Confirm' : 'Login'}
+                    </Button>
                 </form>
             </Form>
         </CardWrapper>

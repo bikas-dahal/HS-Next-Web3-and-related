@@ -7,6 +7,7 @@ import authConfig from "@/auth.config";
 import {getUserById} from "@/data/user";
 import {User} from "lucide-react";
 import {getUserByEmail} from "@/data/user";
+import {getTwoFactorConfirmationByUserId} from "@/data/two-factor-confirmation";
 // import {UserRole} from "@prisma/client";
 
 // declare module "@auth/core" {
@@ -50,6 +51,18 @@ export const {
 
             if (!existingUser?.email_verified) {
                 return false
+            }
+
+            if (existingUser.isTwoFactorEnabled) {
+                const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)
+
+                if (!twoFactorConfirmation) return false;
+
+                await db.twoFactorConfirmation.delete({
+                    where: {
+                        id: twoFactorConfirmation.id
+                    }
+                })
             }
 
             console.log('check')
