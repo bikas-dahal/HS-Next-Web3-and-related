@@ -49,9 +49,13 @@ export const {
 
             const existingUser = await getUserById( user.id! );
 
-            if (!existingUser?.email_verified) {
+
+
+            if (!existingUser?.emailVerified) {
                 return false
             }
+
+            console.log('eu', existingUser)
 
             if (existingUser.isTwoFactorEnabled) {
                 const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)
@@ -83,6 +87,12 @@ export const {
                 session.user.role = token.role
             }
 
+            if (session.user) {
+                session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
+            }
+            // session.user.hi = 'hyalo'
+            // console.log(session)
+
             return session
         },
         async jwt({ token }) {
@@ -93,6 +103,7 @@ export const {
             if (!existingUser) return token
 
             token.role = existingUser.role
+            token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
             return token
         }

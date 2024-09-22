@@ -21,19 +21,22 @@ export default {
         Credentials({
             async authorize(credentials) {
                 const validatedData = LoginSchema.safeParse(credentials);
+                // console.log('first')
 
                 if (validatedData.success) {
                     const { email, password } = validatedData.data
                     const user = await getUserByEmail(email)
+                    // console.log('second')
 
                     if (!user || !user.password) {
                         return null
                     }
-
+                    // console.log('user', user)
                     const passwordMatch = await bcrypt.compare(password, user.password);
 
                     if (passwordMatch) return user
                 }
+                // console.log('faile')
 
                 return null
 
