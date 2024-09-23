@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import {db} from "@/lib/db";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "next-auth/react";
 import { auth } from '@/auth'
 
