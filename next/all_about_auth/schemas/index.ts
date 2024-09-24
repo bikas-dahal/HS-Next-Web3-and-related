@@ -25,3 +25,8 @@ export const resetSchema = z.object({
 export const newPasswordSchema = z.object({
     password: z.string().min(6, 'Password must be at least 6 characters long'),
 })
+
+export const SettingSchema = z.object({
+    name: z.optional(z.string()),
+})
+

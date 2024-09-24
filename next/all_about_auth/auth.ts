@@ -8,6 +8,7 @@ import {getUserById} from "@/data/user";
 import {User} from "lucide-react";
 import {getUserByEmail} from "@/data/user";
 import {getTwoFactorConfirmationByUserId} from "@/data/two-factor-confirmation";
+import {getAccountByUserId} from "@/data/account";
 // import {UserRole} from "@prisma/client";
 
 // declare module "@auth/core" {
@@ -90,18 +91,31 @@ export const {
             if (session.user) {
                 session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
             }
+
+            if (session.user) {
+                session.user.name = token.name
+                session.user.email = token.email
+                session.user.isOAuth = token.isOAuth as boolean
+            }
             // session.user.hi = 'hyalo'
             // console.log(session)
 
             return session
         },
         async jwt({ token }) {
+            console.log('called')
 
             if (!token.sub) return token
 
             const existingUser = await getUserById(token.sub)
             if (!existingUser) return token
 
+            const existingAccount = await getAccountByUserId(existingUser.id)
+
+
+            token.isOAuth = !!existingAccount
+            token.name = existingUser.name
+            token.email = existingUser.email
             token.role = existingUser.role
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
