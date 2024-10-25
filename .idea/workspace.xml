@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb01519c-d377-4fe5-91ee-158404ffac55" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistMonoVF.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/app/fonts/GeistVF.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next/musq/tailwind.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next/musq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qz/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/bun.lockb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/components/dotted-separator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/components/dotted-separator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/features/auth/components/sign-in-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/features/auth/components/sign-in-card.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +50,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/HS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/HS/web2_practice/misc/wmsy/src/app/(auth)&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\HS\\next\\musq\\node_modules\\typescript\\lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\HS\\next\\mysite\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -69,6 +69,14 @@
         <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\HS\web2_practice\misc\wmsy\src\app\(auth)" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\HS\web2_practice\misc\wmsy\src\app\(auth)" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -111,6 +119,10 @@
       <workItem from="1726994841143" duration="1996000" />
       <workItem from="1727165139169" duration="14830000" />
       <workItem from="1727245294193" duration="7313000" />
+      <workItem from="1729614707392" duration="6417000" />
+      <workItem from="1729765812129" duration="2130000" />
+      <workItem from="1729772826457" duration="2150000" />
+      <workItem from="1729855158378" duration="1809000" />
     </task>
     <servers />
   </component>

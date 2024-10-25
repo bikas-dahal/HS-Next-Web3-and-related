@@ -15,7 +15,7 @@ export const DottedSeparator = ({
                                     gapSize='6px',
                                     direction='horizontal',
                                     height='2px',
-                                    color='#d4d4d8'
+                                    color='#333333'
 }: DottedSeparatorProps) => {
 
     const isHorizontal = direction === 'horizontal'
@@ -30,7 +30,7 @@ export const DottedSeparator = ({
                 style={{
                     width: isHorizontal ? '100%' : height,
                     height: isHorizontal ? height : '100%',
-                    backgroundImage: `radial-gradient(circle, ${color} 25%, transparent 25%,)`,
+                    backgroundImage: `radial-gradient(circle, ${color} 25%, transparent 25%)`,
                     backgroundSize: isHorizontal ? `${parseInt(dotSize) + parseInt(gapSize)}px ${height}` : `${height} ${parseInt(dotSize) + parseInt(gapSize)}px`,
                     backgroundRepeat: isHorizontal ? 'repeat-x' : 'repeat-y',
                     backgroundPosition: 'center'
