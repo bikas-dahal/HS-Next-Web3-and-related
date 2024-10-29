@@ -29,3 +29,19 @@ export const QUOTE_BY_ID_QUERY = defineQuery(`*[_type == 'quote' && _id == $id ]
         category,
         pitch
 }`)
+
+export const QUOTE_VIEWS_QUERY = defineQuery(`*[_type == 'quote' && _id == $id ][0]{
+        _id, views
+    }`)
+
+export const AUTHOR_BY_GITHUB_ID_QUERY =defineQuery(`
+    *[_type == 'author' && id == $id ][0] {
+        _id, 
+        id,
+        name,
+        username,
+        email,
+        image,
+        bio
+ }
+`)
