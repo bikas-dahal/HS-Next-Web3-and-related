@@ -4,16 +4,18 @@ import {client} from "@/sanity/lib/client";
 import {STARTUPS_QUERY} from "@/sanity/lib/queries";
 
 import {PhilosophyTypeCard} from "@/components/PhilosophyCard";
+import {sanityFetch, SanityLive} from "@/lib/live";
 
 export default async function Home({searchParams}: {searchParams: Promise<{ query?: string }>}) {
 
-
-
     const query = (await searchParams).query
+    const params = { search: query || null}
 
-    const posts = await client.fetch(STARTUPS_QUERY)
+    // const posts = await client.fetch(STARTUPS_QUERY)
 
-    console.log(JSON.stringify(posts, null, 2));
+    const {data: posts } = await sanityFetch({query: STARTUPS_QUERY, params})
+
+    // console.log(JSON.stringify(posts, null, 2));
 
     // const posts = [{
     //     _createdAt: new Date(),
@@ -54,6 +56,8 @@ export default async function Home({searchParams}: {searchParams: Promise<{ quer
                   )}
               </ul>
           </section>
+
+          <SanityLive />
       </>
   );
 }

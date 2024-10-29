@@ -29,7 +29,7 @@ const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
                     <Link href={`/user/${author?._id}`}>
                         <p className={'text-16-medium line-clamp-1'}>{author?.name}</p>
                     </Link>
-                    <Link href={`/quotes/${_id}`}>
+                    <Link href={`/quote/${_id}`}>
                         <h3 className={'text-26-semibold line-clamp-1'}>{title}</h3>
                     </Link>
                 </div>
@@ -37,7 +37,7 @@ const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
                     <Image src={'https://placehold.co/48x48'} alt={'placeholder'} width={48} height={48} className={'rounded-full'} />
                 </Link>
             </div>
-            <Link href={`/quotes/${_id}`}>
+            <Link href={`/quote/${_id}`}>
                 <p className={'startup-card_desc'}>{description}</p>
                 <img src={image} alt={'placeholder'} className={'startup-card_img'} />
             </Link>
@@ -47,7 +47,7 @@ const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
                     <p className={'text-16-medium line-clamp-1'}>{category}</p>
                 </Link>
                 <Button className={'startup-card_btn'} asChild>
-                    <Link href={`/quotes/${_id}`}>
+                    <Link href={`/quote/${_id}`}>
                         Details
                     </Link>
                 </Button>
