@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb01519c-d377-4fe5-91ee-158404ffac55" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web2_practice/misc/sup/app/(root)/quote/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web2_practice/misc/sup/components/QuoteForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next/musq" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qz/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/bun.lockb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/qzz/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/components/dotted-separator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/components/dotted-separator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/features/auth/components/sign-in-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/wmsy/src/features/auth/components/sign-in-card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/sup/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/sup/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web2_practice/misc/sup/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web2_practice/misc/sup/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,23 +39,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/HS/web2_practice/misc/wmsy/src/app/(auth)&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\HS\\next\\mysite\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/HS/web2_practice/misc/wmsy/src/app/(auth)",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\HS\\next\\kook\\front\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -75,7 +70,11 @@
       <recent name="D:\HS\web2_practice\misc\wmsy\src\app\(auth)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\HS\web2_practice\misc\wmsy\src\app\(auth)" />
+      <recent name="D:\HS\web2_practice\misc\sup\components" />
+      <recent name="D:\HS\web2_practice\misc\sup\app\fonts" />
+      <recent name="D:\HS\web2_practice\misc\sup\public" />
+      <recent name="D:\HS\web2_practice\misc\sup\app" />
+      <recent name="D:\HS\web2_practice\misc\sup" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -122,7 +121,12 @@
       <workItem from="1729614707392" duration="6417000" />
       <workItem from="1729765812129" duration="2130000" />
       <workItem from="1729772826457" duration="2150000" />
-      <workItem from="1729855158378" duration="1809000" />
+      <workItem from="1729855158378" duration="4779000" />
+      <workItem from="1729924201158" duration="6149000" />
+      <workItem from="1730048452437" duration="977000" />
+      <workItem from="1730082973852" duration="7820000" />
+      <workItem from="1730101442867" duration="6415000" />
+      <workItem from="1730180630778" duration="11630000" />
     </task>
     <servers />
   </component>

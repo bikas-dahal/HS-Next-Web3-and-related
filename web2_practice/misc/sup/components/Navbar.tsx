@@ -17,7 +17,7 @@ const Navbar = async () => {
                 <div className={'flex gap-5 items-center bg-white text-black'}>
                     {session && session?.user ? (
                         <>
-                            <Link href={'/startup/create'}><span>Create</span></Link>
+                            <Link href={'/quote/create'}><span>Create</span></Link>
                             <form action={async () => {
                                 'use server'
                                 await signOut({
