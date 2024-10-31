@@ -23,6 +23,7 @@
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.62.2",
     "@tailwindcss/typography": "^0.5.15",
+    "@uiw/react-md-editor": "^4.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
