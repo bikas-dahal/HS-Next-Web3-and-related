@@ -9,6 +9,7 @@ import {formSchema} from "@/lib/validation";
 import {z} from "zod";
 import {useToast} from "@/hooks/use-toast";
 import {useRouter} from "next/navigation";
+import {createPitch} from "@/lib/actions";
 
 const QuoteForm = () => {
 
@@ -31,20 +32,20 @@ const QuoteForm = () => {
 
             console.log(formValues)
 
-            // const result = await createIdea(prevState, formData, pitch)
-            // if (result.status === "SUCCESS") {
-            //     toast({
-            //         title: 'Success',
-            //         description: 'Your idea is live.',
-            //         variant: 'success',
-            //     })
-            //
-            // router.push(`/quote/${result.id}`)
-            //
-            // }
-            // return result
+            const result = await createPitch(prevState, formData, pitch)
+            if (result.status === "SUCCESS") {
+                toast({
+                    title: 'Success',
+                    description: 'Your idea is live.',
+                    variant: 'default',
+                })
 
-            // console.log(result)
+            router.push(`/quote/${result._id}`)
+
+            }
+            return result
+
+            console.log(result)
 
         } catch (e) {
             if (e instanceof z.ZodError) {

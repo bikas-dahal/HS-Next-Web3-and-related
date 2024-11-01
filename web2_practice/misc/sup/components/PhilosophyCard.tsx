@@ -1,10 +1,11 @@
 import React from 'react'
-import {formatDate} from "@/lib/utils";
+import {cn, formatDate} from "@/lib/utils";
 import {EyeIcon} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {Author, Quote} from "@/sanity/types";
+import {Skeleton} from "@/components/ui/skeleton";
 
 export type PhilosophyTypeCard = Omit<Quote, 'author'> & { author?: Author };
 
@@ -34,7 +35,7 @@ const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
                     </Link>
                 </div>
                 <Link href={`/user/${author?._id}`}>
-                    <Image src={'https://placehold.co/48x48'} alt={'placeholder'} width={48} height={48} className={'rounded-full'} />
+                    <Image src={author?.image} alt={author?.name} width={48} height={48} className={'rounded-full'} />
                 </Link>
             </div>
             <Link href={`/quote/${_id}`}>
@@ -55,4 +56,15 @@ const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
         </li>
     )
 }
+
+export const PhilosophyCardSkeleton = () => (
+    <>
+        {[0, 1, 2, 3, 4].map(( index:number) => (
+            <li key={cn('skeleton', index)}>
+                <Skeleton className={'startup-card_skeleton'} />
+            </li>
+        ))}
+    </>
+)
+
 export default PhilosophyCard
