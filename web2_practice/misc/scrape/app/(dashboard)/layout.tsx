@@ -1,6 +1,7 @@
 import React from 'react'
 import {Separator} from "@/components/ui/separator";
 import DesktopSidebar from "@/components/Sidebar";
+import BreadcrumbHeader from "@/components/BreadcrumbHeader";
 
 const Layout = ({ children }: {children: React.ReactNode}) => {
     return (
@@ -8,7 +9,7 @@ const Layout = ({ children }: {children: React.ReactNode}) => {
             <DesktopSidebar />
             <div className={'flex flex-1 flex-col min-h-screen'}>
                 <header className={'flex items-center justify-between px-6 py-4 h-[50px] container'}>
-                    Scraper
+                    <BreadcrumbHeader />
                 </header>
                 <Separator />
                 <div className={'overflow-auto'}>

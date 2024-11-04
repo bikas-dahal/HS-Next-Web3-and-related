@@ -1,0 +1,8 @@
+'use client'
+
+
+import React from "react";
+
+export function AppProviders({ children}: {children: React.ReactNode}) {
+
+}
