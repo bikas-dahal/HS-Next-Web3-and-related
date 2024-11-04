@@ -2,6 +2,7 @@
 import React from 'react'
 import {usePathname} from "next/navigation";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList} from "@/components/ui/breadcrumb";
+import {MobileSidebar} from "@/components/Sidebar";
 
 const BreadcrumbHeader = () => {
 
@@ -11,6 +12,7 @@ const BreadcrumbHeader = () => {
 
     return (
         <div className={'flex items-center flex-start'}>
+            <MobileSidebar />
             <Breadcrumb>
                 <BreadcrumbList>
                     {paths.map((path, index) => (
