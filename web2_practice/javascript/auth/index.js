@@ -1,67 +1,126 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
+const {UserModel, TodoModel} = require("./db");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const users = []
+
+let dotenv = require("dotenv").config({ path: "./.env" });
+
+
+// const users = []
+
 
 JWT_SECRET = '12andoaoun31'
 
+mongoose.connect(process.env.MONGO_URL)
+
 const app = express()
-app.use(express.json())
+app.use(express.json()) // parsing the json body
 
-app.get('/', (req, res) => {
-    res.json({
-        status: 200,
-        data: 'checking'
-    })
-})
 
-app.post('/signup', (req, res) => {
+app.post('/signup',async (req, res) => {
     // const username = req.body.username
     // const password = req.body.password
 
-    const { username, password } = req.body;
+    const { email, password, name } = req.body;
 
-    users.push({
-        username,
-        password
-    })
+    const hashedPassword = await bcrypt.hash(password, 6);
 
-    res.json({
-        "message": "Sign up successfully",
-    })
-    console.log(req.body)
+    try {
+        await UserModel.create({
+            email,
+            password: hashedPassword,
+            name,
+        })
+
+        res.json({
+            "message": "Sign up successfully",
+        })
+        console.log(req.body)
+
+    } catch (e) {
+        res.status(400).send({
+            error: e.message,
+        })
+    }
+
 
 })
 
 // let foundUser = null
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
 
     // const username = req.body.username
     // const password = req.body.password
 
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-
-    const foundUser = users.find(user => user.username === username && user.password === password)
-
+    const foundUser = await UserModel.findOne({
+        email
+    })
     if (!foundUser) {
         res.status(403).send({
             message: "User not exist",
         })
     }
 
+    // const foundUser = users.find(user => user.username === username && user.password === password)
+
+    const passwordMatch = await bcrypt.compare(password, foundUser.password)
+
+    if (!passwordMatch) {
+        res.status(403).send({
+            message: "Invalid credentials",
+        })
+    }
 
     console.log(foundUser)
 
-    const token = jwt.sign({username}, JWT_SECRET)
+    const token = jwt.sign({id: foundUser._id.toString()}, JWT_SECRET)
 
     res.json({
         token
     })
+
     console.log(token)
     console.log(req.body)
-    console.log(users)
+    // console.log(users)
+})
+
+app.post('/todo', authMiddleware, async (req, res)=> {
+    const userId = req.userId
+    const title = req.body.title
+
+    console.log(userId)
+
+    await TodoModel.create({
+        title,
+        userId
+    })
+
+    res.json({
+        status: 200,
+        message: "todo created"
+    })
+})
+
+app.get('/todos', authMiddleware, async (req, res)=> {
+    console.log(req)
+    const userId = req.userId
+
+    const todos = await TodoModel.find({
+        userId
+    })
+
+
+    console.log(userId)
+
+    res.json({
+        id: userId,
+        todos
+    })
 })
 
 function authMiddleware(req, res, next) {
@@ -69,8 +128,8 @@ function authMiddleware(req, res, next) {
 
     const decodedData = jwt.verify(token, JWT_SECRET)
 
-    if (decodedData.username) {
-        req.username = decodedData.username
+    if (decodedData.id) {
+        req.userId = decodedData.id
         next()
     } else {
         res.status(403).send({
@@ -80,20 +139,24 @@ function authMiddleware(req, res, next) {
 }
 
 
-app.get('/me', authMiddleware, (req, res) => {
-    // const token = req.headers.token
-
+app.get('/me', authMiddleware, async (req, res) => {
+    const token = req.headers.token
+    console.log(token)
     try {
-        // const decoded_info = jwt.verify(token, JWT_SECRET)
+        const decoded_info = jwt.verify(token, JWT_SECRET)
         // const unAuthDecodedInfo = jwt.decode(token)
+        console.log(decoded_info)
 
         // const foundUser = users.find(user => user.username === decoded_info.username)
-        const foundUser = users.find(user => user.username === req.username)
+        // const foundUser = users.find(user => user.username === req.username)
+        const foundUser = await UserModel.findOne({
+            _id: decoded_info.id
+        })
 
 
         if (foundUser) {
             res.json({
-                username: foundUser.username,
+                email: foundUser.email,
                 password: foundUser.password,
             })
         } else {
