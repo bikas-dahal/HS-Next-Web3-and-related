@@ -4,7 +4,7 @@ type Props = {}
 
 const Navbar = (props: Props) => {
   return (
-    <div className='bg-red-400 h-10 items-center px-3 flex justify-between '>
+    <div className='h-full w-full flex flex-col gap-y-10 items-center justify-center bg-emerald-500'>
         <div className='flex gap-4'>
             <div className='hover:underline'>
                 Home
