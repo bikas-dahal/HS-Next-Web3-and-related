@@ -1,13 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, {useState} from 'react'
 import {Workflow} from "@prisma/client";
 import {Card, CardContent} from "@/components/ui/card";
 import {WorkflowStatus} from "@/types/workflow";
-import {FileTextIcon, PlayIcon} from "lucide-react";
+import {FileTextIcon, MoreVertical, PlayIcon, ShuffleIcon, TrashIcon} from "lucide-react";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
-import {buttonVariants} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent, DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import {Tooltip} from "@/components/ui/tooltip";
+import TooltipWrapper from "@/components/TooltipWrapper";
+import DeleteWorkflowDialog from "@/app/(dashboard)/workflows/_components/DeleteWorkflowDialog";
 
 const WorkflowCard = ({ workflow }: {workflow: Workflow}) => {
 
@@ -45,10 +55,48 @@ const WorkflowCard = ({ workflow }: {workflow: Workflow}) => {
                 </div>
                 </div>
                 <div className={'flex items-center space-x-2'}>
-                    <Link href={`/workflow/editor/${workflow.id}`} className={cn(buttonVariants({variant: 'outline'}))}
+                    <Link href={`/workflow/editor/${workflow.id}`} className={cn(buttonVariants({variant: 'outline', size: 'sm'}), 'flex items-center gap-2')}>
+                        <ShuffleIcon size={16} />
+                        Edit
+                    </Link>
+                    <WorkflowActions workflowName={workflow.name} workflowId={workflow.id} />
                 </div>
             </CardContent>
         </Card>
     )
 }
+
+function WorkflowActions ({ workflowName, workflowId }: {workflowName: string, workflowId: string}) {
+
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+
+    return (
+        <>
+            <DeleteWorkflowDialog open={showDeleteDialog} setOpen={setShowDeleteDialog} workflowName={workflowName} workflowId={workflowId} />
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                    <Button variant={'outline'} size={'sm'}>
+                <TooltipWrapper content={'More Actions'}>
+                    <div className={'flex items-center justify-center w-full h-full'}>
+                            <MoreVertical size={18} />
+                    </div>
+                </TooltipWrapper>
+                    </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align={'end'}>
+                <DropdownMenuLabel>
+                    Actions
+                </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className={'text-destructive flex items-center gap-2'} onSelect={() => setShowDeleteDialog((prev) => !prev)}>
+                <TrashIcon size={16} /> Delete
+            </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+        </>
+    )
+
+}
+
+
 export default WorkflowCard
