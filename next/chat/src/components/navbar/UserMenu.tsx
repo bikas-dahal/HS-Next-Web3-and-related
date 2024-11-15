@@ -14,12 +14,15 @@ import Link from "next/link";
 import React from "react";
 
 type Props = {
-    user: Session["user"];
+    userInfo: {
+        name: string | null;
+        image: string | null;
+    } | null;
 };
 
-export default function UserMenu({
-                                     user,
-                                 }: Props) {
+export default function UserMenu({ userInfo }: Props) {
+
+    // console.log('userinfo', userInfo)
     return (
         <Dropdown placement="bottom-end">
             <DropdownTrigger>
@@ -28,9 +31,9 @@ export default function UserMenu({
                     as="button"
                     className="transition-transform"
                     color="default"
-                    name={user?.name || "user avatar"}
+                    name={userInfo?.name || "user avatar"}
                     size="sm"
-                    src={user?.image || "/images/user.png"}
+                    src={userInfo?.image || "/images/user.png"}
                 />
             </DropdownTrigger>
             <DropdownMenu
@@ -41,10 +44,10 @@ export default function UserMenu({
                     <DropdownItem
                         isReadOnly
                         as="span"
-                        className="h-14 flex flex-row"
+                        className="h-8 flex flex-row text-pink-800"
                         aria-label="username"
                     >
-                        Signed in as {user?.name}
+                        {userInfo?.name}
                     </DropdownItem>
                 </DropdownSection>
                 <DropdownItem

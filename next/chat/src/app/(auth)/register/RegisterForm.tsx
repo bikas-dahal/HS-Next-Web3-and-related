@@ -16,6 +16,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { GiPadlock } from "react-icons/gi";
 import {registerUser} from "@/actions/authAction";
+import {handleFormServerErrors} from "@/lib/util";
 
 export default function RegisterForm() {
     const {
@@ -38,21 +39,23 @@ export default function RegisterForm() {
         if (result.status === 'success') {
             console.log('User Registered')
         } else {
-            if (Array.isArray(result.error)){
-                result.error.forEach((error) => {
-                    const fieldName = error.path.join('.') as
-                        | "email"
-                        | "password"
-                        | "name"
-                    setError(fieldName, {
-                        message: error.message,
-                    })
-                })
-            } else {
-                setError('root.serverError', {
-                    message: result.error,
-                })
-            }
+            // if (Array.isArray(result.error)){
+            //     result.error.forEach((error) => {
+            //         const fieldName = error.path.join('.') as
+            //             | "email"
+            //             | "password"
+            //             | "name"
+            //         setError(fieldName, {
+            //             message: error.message,
+            //         })
+            //     })
+            // } else {
+            //     setError('root.serverError', {
+            //         message: result.error,
+            //     })
+            // }
+
+            handleFormServerErrors(result, setError)
 
         }
 

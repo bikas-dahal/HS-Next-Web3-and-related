@@ -10,10 +10,14 @@ import { GiSelfLove } from "react-icons/gi";
 import {NavLink} from "./NavLink";
 import UserMenu from "@/components/navbar/UserMenu";
 import {auth} from "@/auth";
+import {getUserInfoForNav} from "@/actions/userAction";
 
 export default async function TopNav() {
 
     const session = await auth()
+    const userInfo = session?.user && await getUserInfoForNav()
+
+    // console.log("userinfo", userInfo)
 
     return (
         <Navbar
@@ -51,8 +55,8 @@ export default async function TopNav() {
                 />
             </NavbarContent>
             <NavbarContent justify="end">
-                {session?.user ? (
-                    <UserMenu user={session.user} />
+                {userInfo ? (
+                    <UserMenu userInfo={userInfo} />
                 ) : (
                     <>
                         <Button
