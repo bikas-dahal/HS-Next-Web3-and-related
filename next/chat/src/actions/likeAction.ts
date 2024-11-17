@@ -18,11 +18,25 @@ export async function toggleLikeMember (targetUserId: string, isLiked: boolean) 
                 }
             })
         } else {
-            await prisma.like.create({
+            const like = await prisma.like.create({
                 data: {
                     sourceUserId: userId,
                     targetUserId
+                },
+                select: {
+                    sourceMember: {
+                        select: {
+                            name: true,
+                            image: true,
+                            userId: true
+                        }
+                    }
                 }
+            })
+            await pusherServer.trigger(`private-${targetUserId}`, 'like:new', {
+                name: like.sourceMember.name,
+                image: like.sourceMember.image,
+                userId: like.sourceMember.userId
             })
         }
     } catch (error) {
