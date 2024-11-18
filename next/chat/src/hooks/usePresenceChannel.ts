@@ -4,11 +4,13 @@ import {Channel, Members} from "pusher-js";
 import {pusherClient} from "@/lib/pusher";
 
 export const usePresenceChannel = () => {
+
     const {set, add, remove} = usePresenceStore(state => ({
         set: state.set,
         add: state.add,
         remove: state.remove
     }));
+
     const channelRef = useRef<Channel | null>(null);
 
     const handleSetMembers = useCallback((memberIds: string[]) => {

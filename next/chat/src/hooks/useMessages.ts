@@ -27,21 +27,18 @@ const inboxColumns = [
 export const useMessages = (
     initialMessages: MessageDto[]
 ) => {
-    const {
-        set,
-        remove,
-        messages,
-        updateUnreadCount,
-    } = useMessageStore((state) => ({
+    const { set, remove, messages, updateUnreadCount,} = useMessageStore((state) => ({
         set: state.set,
         remove: state.remove,
         messages: state.messages,
         updateUnreadCount: state.updateUnreadCount,
     }));
+
     const searchParams = useSearchParams();
     const router = useRouter();
-    const isOutbox =
-        searchParams.get("container") === "outbox";
+
+    const isOutbox = searchParams.get("container") === "outbox";
+
     const [isDeleting, setDeleting] = useState({
         id: "",
         loading: false,

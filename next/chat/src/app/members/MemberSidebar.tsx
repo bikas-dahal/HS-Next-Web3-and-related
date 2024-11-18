@@ -13,6 +13,7 @@ import { Member } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import PresenceDot from "@/components/PresenceDot";
 
 type Props = {
     member: Member;
@@ -43,22 +44,25 @@ export default function MemberSidebar({
                 alt="User profile main image"
                 className="rounded-full mt-6 aspect-square object-cover"
             />
-            <CardBody>
+            {/*<CardBody className={'overflow-hidden'}>*/}
+                <CardBody>
                 <div className="flex flex-col items-center">
-                    <div className="text-2xl">
-                        {member.name},{" "}
-                        {calculateAge(member.dateOfBirth)}
-                    </div>
-                    <div className="text-sm text-neutral-500">
-                        {member.city}, {member.country}
+                    <div className="flex">
+                        <div className="text-2xl">
+                            {member.name},{" "}
+                            {calculateAge(member.dateOfBirth)}
+                        </div>
+                        <div>
+                            <PresenceDot member={member}/>
+                        </div>
                     </div>
                 </div>
-                <Divider className="my-3" />
-                <nav className="flex flex-col p-4 ml-4 text-2xl gap-4">
-                    {navLinks.map((link) => (
-                        <Link
-                            href={link.href}
-                            key={link.name}
+                    <Divider className="my-3"/>
+                    <nav className="flex flex-col p-4 ml-4 text-2xl gap-4">
+                        {navLinks.map((link) => (
+                            <Link
+                                href={link.href}
+                                key={link.name}
                             className={`block rounded 
                                 ${
                                 pathname ===

@@ -3,6 +3,7 @@
 
 import {getAuthUserId} from "@/actions/authAction";
 import {prisma} from "@/lib/prisma";
+import {pusherServer} from "@/lib/pusher";
 
 export async function toggleLikeMember (targetUserId: string, isLiked: boolean) {
     try {
@@ -33,6 +34,7 @@ export async function toggleLikeMember (targetUserId: string, isLiked: boolean) 
                     }
                 }
             })
+
             await pusherServer.trigger(`private-${targetUserId}`, 'like:new', {
                 name: like.sourceMember.name,
                 image: like.sourceMember.image,
