@@ -3,26 +3,27 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components
 import {DottedSeparator} from "@/components/dotted-separator";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {useState} from "react";
 import {FcGoogle} from "react-icons/fc";
 import {FaGithub} from "react-icons/fa";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {z} from "zod";
-import {SignInFormSchema} from "@/schema";
+import {signInFormSchema, signInType} from "@/schemas/signInSchema";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import Link from "next/link";
-// import {Separator} from "@/components/ui/separator";
+import {useLogin} from "@/features/auth/api/use-login";
 
 export const SignInCard = () => {
 
-    const form = useForm<z.infer<typeof SignInFormSchema>>({
-        resolver: zodResolver(SignInFormSchema),
+    const form = useForm<signInType>({
+        resolver: zodResolver(signInFormSchema),
         defaultValues: {email: "", password: ""},
     })
 
-    const onSubmit = (values: z.infer<typeof SignInFormSchema>) => {
-        console.log(values);
+    const { mutate } = useLogin()
+
+    const onSubmit = (values: signInType) => {
+        mutate({json: values})
+        // console.log(values);
     }
 
     return (

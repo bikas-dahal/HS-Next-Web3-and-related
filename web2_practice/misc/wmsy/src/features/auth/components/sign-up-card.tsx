@@ -3,23 +3,25 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {DottedSeparator} from "@/components/dotted-separator";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {useState} from "react";
 import {FcGoogle} from "react-icons/fc";
 import {FaGithub} from "react-icons/fa";
 import Link from "next/link";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { SignUpFormSchema} from "@/schema";
+import {signUpFormSchema, signUpType} from "@/schemas/signUpSchema";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
-import {z} from "zod";
-// import {Separator} from "@/components/ui/separator";
+import {Separator} from "@/components/ui/separator";
+import {useRegister} from "@/features/auth/api/use-register";
 
 
 
 export const SignUpCard = () => {
 
-    const form = useForm<z.infer<typeof SignUpFormSchema>>({
-        resolver: zodResolver(SignUpFormSchema),
+    // const pathname = usePathname()
+    // console.log('pathname', pathname)
+
+    const form = useForm<signUpType>({
+        resolver: zodResolver(signUpFormSchema),
         defaultValues: {
             name: '',
             email: '',
@@ -27,7 +29,10 @@ export const SignUpCard = () => {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof SignUpFormSchema>) => {
+    const { mutate } = useRegister()
+
+    const onSubmit = (values: signUpType) => {
+        mutate({json: values})
         console.log(values);
     }
 
@@ -42,9 +47,7 @@ export const SignUpCard = () => {
                     href={'#'}><span className={'text-blue-700'}>Terms of Conditions</span></Link>
                 </CardDescription>
             </CardHeader>
-            <div className={'px-6 mb-3'}>
-                <DottedSeparator direction={'horizontal'}/>
-            </div>
+            <Separator />
             <CardContent className={'p-7'}>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className={'space-y-4'}>
