@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const {UserModel, TodoModel} = require("./db");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { z } = require('zod')
 
 
 let dotenv = require("dotenv").config({ path: "./.env" });
@@ -22,6 +23,21 @@ app.use(express.json()) // parsing the json body
 app.post('/signup',async (req, res) => {
     // const username = req.body.username
     // const password = req.body.password
+
+    const requiredBody = z.object({
+        email: z.string().email(),
+        password: z.string(),
+        name: z.string().min(2).max(20),
+    })
+
+    const parsedBody = requiredBody.safeParse(req.body)
+
+    if (!parsedBody.success) {
+        return res.status(400).json({
+            message: "Inputs should be string",
+            error: parsedBody.error
+        })
+    }
 
     const { email, password, name } = req.body;
 
