@@ -1,4 +1,4 @@
-
+'use client'
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {DottedSeparator} from "@/components/dotted-separator";
 import {Input} from "@/components/ui/input";
@@ -19,7 +19,7 @@ export const SignInCard = () => {
         defaultValues: {email: "", password: ""},
     })
 
-    const { mutate } = useLogin()
+    const { mutate, isPending } = useLogin()
 
     const onSubmit = (values: signInType) => {
         mutate({json: values})
@@ -47,6 +47,7 @@ export const SignInCard = () => {
                                 <FormControl>
                                     <Input
                                         type={'email'}
+                                        disabled={isPending}
                                         placeholder={'Enter your email address'}
                                         {...field}
                                     />
@@ -64,6 +65,7 @@ export const SignInCard = () => {
                                 <FormControl>
                                     <Input
                                         type={'password'}
+                                        disabled={isPending}
                                         placeholder={'Enter your password'}
                                         {...field}
                                     />
@@ -73,7 +75,7 @@ export const SignInCard = () => {
                         )}>
                     </FormField>
                     {/*<Input required type={'password'} value={password} onChange={() => {}} min={6} max={128} placeholder={'Enter password'} disabled={false} />*/}
-                    <Button disabled={false} size={"lg"} className={'w-full'}>Login</Button>
+                    <Button disabled={isPending} size={"lg"} className={'w-full'}>Login</Button>
                 </form>
                 </Form>
             </CardContent>
@@ -81,10 +83,10 @@ export const SignInCard = () => {
                 <DottedSeparator />
             </div>
             <CardContent className={'flex flex-col p-7 gap-y-4'}>
-                <Button size={"lg"} disabled={false} variant={"secondary"}>
+                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
                     <FcGoogle className={'mr-2 size-5'} />
                     Login with Google</Button>
-                <Button size={"lg"} disabled={false} variant={"secondary"}>
+                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
                     <FaGithub className={'mr-2 size-5'} />
                     Login with Github</Button>
 

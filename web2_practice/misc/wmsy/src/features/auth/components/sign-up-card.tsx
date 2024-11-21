@@ -1,3 +1,5 @@
+'use client'
+
 
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {DottedSeparator} from "@/components/dotted-separator";
@@ -29,7 +31,7 @@ export const SignUpCard = () => {
         }
     })
 
-    const { mutate } = useRegister()
+    const { mutate, isPending } = useRegister()
 
     const onSubmit = (values: signUpType) => {
         mutate({json: values})
@@ -99,7 +101,7 @@ export const SignUpCard = () => {
                                 </FormItem>
                             )}>
                         </FormField>
-                        <Button disabled={false} size={"lg"} className={'w-full'}>Sign up</Button>
+                        <Button disabled={isPending} size={"lg"} className={'w-full'}>Sign up</Button>
                     </form>
                 </Form>
 
@@ -108,10 +110,10 @@ export const SignUpCard = () => {
                 <DottedSeparator/>
             </div>
             <CardContent className={'flex flex-col p-7 gap-y-4'}>
-                <Button size={"lg"} disabled={false} variant={"secondary"}>
+                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
                     <FcGoogle className={'mr-2 size-5'}/>
                     Login with Google</Button>
-                <Button size={"lg"} disabled={false} variant={"secondary"}>
+                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
                     <FaGithub className={'mr-2 size-5'}/>
                     Login with Github</Button>
 
