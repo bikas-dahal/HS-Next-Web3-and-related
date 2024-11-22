@@ -20,7 +20,7 @@ export const getCurrent = async () => {
 
         const account = new Account(client)
 
-        console.log('hi', account)
+        // console.log('hi', account)
 
         return await account.get()
     } catch (error) {
