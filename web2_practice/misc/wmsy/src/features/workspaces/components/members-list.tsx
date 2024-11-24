@@ -41,6 +41,7 @@ const MembersList = () => {
                 window.location.reload()
             }
         })
+    }
 
   return (
     <Card className='h-full w-full'>

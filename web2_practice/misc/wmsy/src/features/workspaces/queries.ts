@@ -51,13 +51,10 @@ export const getWorkspaces = async () => {
 
 
 export const getWorkspace = async ({ workspaceId }: {workspaceId: string}) => {
-    try {
-        
+   
         const { databases, account } = await createSessionClient()
 
         const user = await account.get()
-
-        // console.log('hi', account)
 
         const member = await getMembers({
             databases,
@@ -65,17 +62,9 @@ export const getWorkspace = async ({ workspaceId }: {workspaceId: string}) => {
             userId: user.$id,
         })
 
-        if (!member) return null
-
-
-        // if (members.total === 0) {
-        //     return ({
-        //             document: [],
-        //             total: 0
-        //     })
-        // }
-
-        // const workspaceIds = members.documents.map((member) => member.workspaceId)
+        if (!member) {
+            throw new Error('You are not a member of this workspace')
+        }
 
         const workspace = await databases.getDocument<Workspace>(
             DATABASE_ID,
@@ -83,17 +72,13 @@ export const getWorkspace = async ({ workspaceId }: {workspaceId: string}) => {
             workspaceId
         )
 
+
         return workspace
-    } catch (error) {
-        console.log(error)
-        return null
-    }
 }
 
 
 export const getWorkspaceInfo = async ({ workspaceId }: {workspaceId: string}) => {
-    try {
-        
+ 
         const { databases } = await createSessionClient()
 
         const workspace = await databases.getDocument<Workspace>(
@@ -105,8 +90,5 @@ export const getWorkspaceInfo = async ({ workspaceId }: {workspaceId: string}) =
         return {
             name: workspace.name 
         }
-    } catch (error) {
-        console.log(error)
-        return null
-    }
+    
 }

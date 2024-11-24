@@ -39,7 +39,6 @@ export const Navigation = () => {
     const workspaceId = useWorkspaceId()
     const pathname = usePathname()
 
-    
 
     return (
         <ul className="flex flex-col gap-y-2">

@@ -4,37 +4,37 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-type ResponseType = InferResponseType<typeof client.api.workspaces[':workspaceId']['$patch'], 200>
-type RequestType = InferRequestType<typeof client.api.workspaces[':workspaceId']['$patch']>
+type ResponseType = InferResponseType<typeof client.api.projects[':projectId']['$delete'], 200>
+type RequestType = InferRequestType<typeof client.api.projects[':projectId']['$delete']>
 
 
-export const useUpdateWorkspace = () => {
+export const useDeleteProject = () => {
 
-    const queryClient = useQueryClient()
     const router = useRouter()
+    const queryClient = useQueryClient()
 
     const mutation = useMutation<ResponseType, Error, RequestType>({
-        mutationFn: async ({form, param}) => {
-            const response = await client.api.workspaces[':workspaceId']['$patch']({form, param})
+        mutationFn: async ({ param}) => {
+            const response = await client.api.projects[':projectId']['$delete']({ param})
 
             if (!response.ok) {
-                throw new Error('Failed to update workspace')
+                throw new Error('Failed to delete project')
             }
 
             return await response.json()
         },
         onSuccess: ({ data }) => {
-            toast.success('Workspace updated successfully')
+            toast.success('project deleted successfully')
             router.refresh()
             queryClient.invalidateQueries({
-                queryKey: ['workspaces']
+                queryKey: ['projects']
             })
             queryClient.invalidateQueries({
-                queryKey: ['workspaces', data.$id]
+                queryKey: ['project', data.$id]
             })
         },
         onError: () => {
-            toast.error('Failed to create workspace')
+            toast.error('Failed to delete project')
         }
     })
 

@@ -12,7 +12,7 @@ interface StandaloneLayoutProps {
             <div className="mx-auto px-4  max-w-screen-xl h-full">
                 <nav className="flex justify-between items-center h-[73px]">
                     <Link href='/'>
-                        <Image src={'./logo.svg'} alt="logo" width={50} height={50} />
+                        <Image className="rounded-md" src={'/logo.jpg'} alt="logo" width={50} height={50} />
                     </Link>
                     <UserButton />
                 </nav>
