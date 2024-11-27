@@ -3,13 +3,53 @@ import { getMembers } from "@/features/members/utils";
 import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { createTaskSchema } from "@/schemas/taskSchema";
-import { Project, TaskStatus } from "@/schemas/types";
+import { Project, Task, TaskStatus } from "@/schemas/types";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 import { z } from "zod";
 
 const app = new Hono()
+    .delete(
+        '/:taskId',
+        sessionMiddleware,
+        async (c) => {
+            const user = c.get('user')
+            const databases = c.get('databases')
+
+            const { taskId } = c.req.param()
+
+            const task = await databases.getDocument<Task>(
+                DATABASE_ID,
+                TASKS_ID,
+                taskId
+            )
+
+            const member = await getMembers({
+                databases,
+                workspaceId: task.workspaceId,
+                userId: user.$id
+            })
+
+            if (!member) {
+                return c.json({
+                    error: 'Unauthorized'
+                }, 401)
+            }
+
+            await databases.deleteDocument(
+                DATABASE_ID,
+                TASKS_ID,
+                taskId
+            )
+
+            return c.json({
+                data: {
+                    $id: task.$id
+                }
+            })
+        }
+    )
     .get(
         '/',
         sessionMiddleware,
@@ -29,10 +69,10 @@ const app = new Hono()
             const {
                 workspaceId,
                 projectId,
-                dueDate,
                 status,
+                search,
                 assigneeId,
-                search
+                dueDate
             } = c.req.valid('query')
 
             const member = await getMembers({
@@ -74,29 +114,35 @@ const app = new Hono()
 
             if (search) {
                 console.log('Search', search);
-                query.push(Query.equal('name',search))
+                query.push(Query.search('name',search))
             }
 
-            const tasks = await databases.listDocuments(
+            const tasks = await databases.listDocuments<Task>(
                 DATABASE_ID,
                 TASKS_ID,
                 query
             )
 
             const projectIds = tasks.documents.map((task) => task.projectId)
-            const assigneeIDs = tasks.documents.map((task) => task.assigneeID)
+            const assigneeIds = tasks.documents.map((task) => task.assigneeId)
+
+            console.log('AssigneeIDs', assigneeIds);
+            
 
             const projects = await databases.listDocuments<Project>(
                 DATABASE_ID,
                 PROJECTS_ID,
-                projectIds.length > 0 ? [Query.equal('$id', projectIds)] : []
+                projectIds.length > 0 ? [Query.contains('$id', projectIds)] : []
             )
 
             const members = await databases.listDocuments(
                 DATABASE_ID,
                 MEMBERS_ID,
-                assigneeIDs.length > 0 ? [Query.equal('$id', assigneeIDs)] : []
+                assigneeIds.length > 0 ? [Query.contains('$id', assigneeIds)] : []
             )
+
+            console.log('members', members);
+            
 
             const assignees = await Promise.all(
                 members.documents.map(async (member) => {
@@ -110,14 +156,19 @@ const app = new Hono()
                 })
             )
 
+            console.log('assignees', assignees);
+            
+
             const populatedTasks = tasks.documents.map((task) => {
                 const project = projects.documents.find(
                     (project) => project.$id === task.projectId
                 )
 
                 const assignee = assignees.find(
-                    (assigne) => assigne.$id === task.assineeId
+                    (assigne) => assigne.$id === task.assigneeId
                 )
+
+
 
                 return {
                     ...task,
@@ -126,6 +177,9 @@ const app = new Hono()
                 }
 
             })
+
+            console.log('PopulatedTasks', populatedTasks);
+            
 
             return c.json({
                 data: {
@@ -186,14 +240,127 @@ const app = new Hono()
                     status,
                     workspaceId,
                     projectId,
+                    dueDate,
                     assigneeId,
-                    position: newPosition,
-                    dueDate
+                    position: newPosition
                 }
             )
 
             return c.json({
                 data: task
+            })
+        }
+    )
+    .patch(
+        '/:taskId',
+        sessionMiddleware,
+        zValidator('json', createTaskSchema.partial()),
+        async (c) => {
+            const user = c.get('user')
+            const databases = c.get('databases')
+            const {
+                name, 
+                status, 
+                projectId, 
+                assigneeId, 
+                dueDate, 
+                description
+            } = c.req.valid('json')
+
+            const taskId = c.req.param('taskId')
+
+            const existingTask = await databases.getDocument<Task>(
+                DATABASE_ID,
+                TASKS_ID,
+                taskId
+            )
+
+            const member = await getMembers({
+                databases,
+                workspaceId: existingTask.workspaceId,
+                userId: user.$id
+            })
+
+            if (!member) {
+                return c.json({
+                    error: 'Unauthorized'
+                }, 401)
+            }
+
+            const task = await databases.updateDocument<Task>(
+                DATABASE_ID,
+                TASKS_ID,
+                taskId,
+                {
+                    name, 
+                    status,
+                    projectId,
+                    dueDate,
+                    assigneeId,
+                    description
+                }
+            )
+
+            return c.json({
+                data: task
+            })
+        }
+    )
+    .get(
+        '/:taskId',
+        sessionMiddleware,
+        async (c) => {
+            const currentUser = c.get('user')
+            const databases = c.get('databases')
+
+            const { taskId } = c.req.param()
+
+            const task = await databases.getDocument<Task>(
+                DATABASE_ID,
+                TASKS_ID,
+                taskId
+            )
+
+            const { users } = await createAdminClient()
+
+            const currentMember = await getMembers({
+                databases,
+                workspaceId: task.workspaceId,
+                userId: currentUser.$id
+            })
+
+            if (!currentMember) {
+                return c.json({
+                    error: 'Unauthorized'
+                }, 401)
+            }
+
+            const project = await databases.getDocument<Project>(
+                DATABASE_ID,
+                PROJECTS_ID,
+                task.projectId
+            )
+
+            const member = await databases.getDocument(
+                DATABASE_ID,
+                MEMBERS_ID,
+                task.assigneeId
+            )
+
+            const user = await users.get(member.userId)
+
+            const assignee = {
+                ...member,
+                name: user.name,
+                email: user.email
+            }
+
+            return c.json({
+                data: {
+                    ...task,
+                    project,
+                    assignee
+                }
             })
         }
     )

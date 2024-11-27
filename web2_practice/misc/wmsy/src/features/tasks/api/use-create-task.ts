@@ -19,7 +19,7 @@ export const useCreateTask = () => {
                 throw new Error('Failed to create task')
             }
 
-            return await response.json() as Promise<ResponseType>
+            return await response.json() 
         },
         onSuccess: () => {
             toast.success('Task created successfully')

@@ -3,8 +3,9 @@ import { useGetMembers } from "@/features/members/api/use-get-members"
 import { useGetProjects } from "@/features/projects/api/use-get-projects"
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id"
 import { TaskStatus } from "@/schemas/types"
-import { ListCheckIcon } from "lucide-react"
+import { CrossIcon, FolderIcon, ListCheckIcon, UserIcon, XIcon } from "lucide-react"
 import { useTaskFilters } from "../hooks/use-task-filters"
+import { DatePicker } from "@/components/date-picker"
 
 interface DataFiltersProps {
     hideProjectFilter?: boolean
@@ -45,6 +46,20 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
         }
     }
 
+    const onAssigneeChange = (value: string) => {
+        if (value == 'all') {
+            setFilters({ assigneeId: null })
+        } else {
+            setFilters({ assigneeId: value as string})
+        }
+    }
+
+    const onProjectChange = (value: string) => {
+        setFilters({ projectId: value === 'all' ? null : value as string })
+    }
+
+
+
 
     if (isLoading) return null 
 
@@ -80,6 +95,59 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
                     </SelectItem>
                 </SelectContent>
             </Select>
+
+
+            <Select
+                defaultValue={assigneeId ?? undefined}
+                onValueChange={(value) => onAssigneeChange(value)}
+            >
+                <SelectTrigger className="w-full lg:w-auto h-8">
+                    <div className="flex items-center pr-2">
+                        <UserIcon className="size-4 mr-2" />
+                        <SelectValue placeholder='All assignees' />
+                    </div>
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="all">All assigness</SelectItem>
+                    <SelectSeparator />
+                    {memberOptions?.map((member) => (
+                        <SelectItem key={member.value} value={member.value}>
+                            {member.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+
+            <Select
+                defaultValue={projectId ?? undefined}
+                onValueChange={(value) => onProjectChange(value)}
+            >
+                <SelectTrigger className="w-full lg:w-auto h-8">
+                    <div className="flex items-center pr-2">
+                        <FolderIcon className="size-4 mr-2" />
+                        <SelectValue placeholder='All projects' />
+                    </div>
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="all">All projects</SelectItem>
+                    <SelectSeparator />
+                    {projectOptions?.map((project) => (
+                        <SelectItem key={project.value} value={project.value}>
+                            {project.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+            <div className="flex">
+            <DatePicker 
+                placeholder="Due date"
+                className="h-8 w-full lg:w-auto"
+                value={dueDate ? new Date(dueDate) : undefined}
+                onChange={(date) => setFilters({ dueDate: date?.toISOString() ?? null })}
+            />
+            <div className="cursor-pointer flex items-center" onClick={() => setFilters({ dueDate: null})}><XIcon className="size-4 ml-1" /></div>
+            </div>
+            
         </div>
     )
 }
