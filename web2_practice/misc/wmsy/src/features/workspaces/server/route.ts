@@ -45,6 +45,47 @@ const app = new Hono()
             data: workspaces
         })
     })
+    .get(
+        '/:workspaceId',
+        sessionMiddleware,
+        async (c) => {
+            const databases = c.get('databases')
+            const user = c.get('user')
+
+            const { workspaceId } = c.req.param()
+
+            const member = await getMembers({ databases, workspaceId, userId: user.$id })
+
+            if (!member) {
+                return c.json({ error: 'You are not a member of this workspace' }, 401)
+            }
+
+            const workspace = await databases.getDocument<Workspace>(DATABASE_ID, WORKSPACES_ID, workspaceId)
+
+            return c.json({ 
+                data: workspace
+            })
+    })
+    .get(
+        '/:workspaceId/info',
+        sessionMiddleware,
+        async (c) => {
+            const databases = c.get('databases')
+
+            const { workspaceId } = c.req.param()
+
+            const workspace = await databases.getDocument<Workspace>(DATABASE_ID, WORKSPACES_ID, workspaceId)
+
+            return c.json({ 
+                data: {
+                    $id: workspace.$id,
+                    name: workspace.name,
+                    image: workspace.image,
+                    code: workspace.inviteCode
+                }
+            })
+    })
+
     .post(
         '/',
         zValidator('form', createWorkspaceSchema),

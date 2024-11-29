@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface ProjectAvatarProps {
     image?: string;
-    name: string;
+    name?: string;
     classname?: string;
     fallbackClassName?: string;
 }

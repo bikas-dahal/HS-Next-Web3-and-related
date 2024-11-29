@@ -30,7 +30,7 @@ export const useUpdateTask = () => {
                 queryKey: ['tasks']
             })
             queryClient.invalidateQueries({
-                queryKey: ['tasks', data.$id]
+                queryKey: ['task', data.$id]
             })
         },
         onError: () => {

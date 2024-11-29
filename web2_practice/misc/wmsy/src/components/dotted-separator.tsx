@@ -15,7 +15,7 @@ export const DottedSeparator = ({
                                     gapSize='6px',
                                     direction='horizontal',
                                     height='2px',
-                                    color='#333333'
+                                    color='#999999'
 }: DottedSeparatorProps) => {
 
     const isHorizontal = direction === 'horizontal'

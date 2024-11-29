@@ -8,6 +8,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
 	"./src/hooks/**/*.{js,ts,jsx,tsx,mdx}",
+	
 
   ],
   theme: {
@@ -71,5 +72,5 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
-};
+}
 export default config;

@@ -71,12 +71,6 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
     updateProject({ 
       form: finalValues,
       param: { projectId: initialValues.$id }
-    }, {
-      onSuccess: ({ data }) => {
-        form.reset()
-        // router.push(`/projects/${data.$id}`)
-      }
-
     })
     console.log(values);
   };
