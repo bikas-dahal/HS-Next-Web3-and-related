@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Loader2Icon, LoaderIcon, PlusIcon } from "lucide-react"
+import {  LoaderIcon, PlusIcon } from "lucide-react"
 import { useCreateTaskModal } from "../hooks/use-create-task-modal"
 import { useGetTasks } from "../api/use-get-tasks"
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id"
@@ -17,6 +17,7 @@ import { useCallback } from "react"
 import { TaskStatus } from "@/schemas/types"
 import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks"
 import { DataCalendar } from "./data-calendar"
+import { useProjectId } from "@/features/projects/hooks/use-project-id"
 
 interface TaskViewSwitcherProps {
     hideProjectFilter?: boolean;
@@ -39,13 +40,13 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
     })
 
     const workspaceId = useWorkspaceId()
-
+    const paramProjectId = useProjectId()
     const { mutate: bulkUpdateTasks } = useBulkUpdateTasks()
 
     const { open } = useCreateTaskModal()  
     const {data: tasks, isLoading: isLoadingTasks } = useGetTasks({ 
         workspaceId,
-        projectId,
+        projectId: paramProjectId || projectId,
         search,
         assigneeId,
         dueDate,
@@ -58,7 +59,7 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
         bulkUpdateTasks({
             json: {tasks}
         })
-     }, [])
+     }, [bulkUpdateTasks])
 
     return (
         <Tabs

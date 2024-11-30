@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { 
-  createWorkspaceSchema, 
   updateWorkspaceSchema, 
   updateWorkspaceType
 } from "@/schemas/workspaceSchema";
@@ -17,12 +16,12 @@ import {
   FormItem, 
   FormMessage 
 } from "@/components/ui/form";
-import { useCreateWorkspace } from "../api/use-create-workspace";
+// import { useCreateWorkspace } from "../api/use-create-workspace";
 import { useRef } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import { ArrowLeftIcon, Copy, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Workspace } from "@/schemas/types";
@@ -200,6 +199,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                       jpg, png, svg, or jpeg | max 1MB
                     </p>
                     <input 
+                      title="hi"
                       className="hidden"
                       accept=".jpg, .png, .svg, /jpeg"
                       type="file"

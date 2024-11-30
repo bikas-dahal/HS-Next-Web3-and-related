@@ -150,7 +150,7 @@ const app = new Hono()
 
                     return {
                         ...member,
-                        name: user.name,
+                        name: user.name || user.email,
                         email: user.email
                     }
                 })
@@ -351,7 +351,7 @@ const app = new Hono()
 
             const assignee = {
                 ...member,
-                name: user.name,
+                name: user.name || user.email,
                 email: user.email
             }
 
@@ -396,6 +396,12 @@ const app = new Hono()
             }
 
             const workspaceId = workspaceIds.values().next().value
+
+            if (!workspaceId) {
+                return c.json({
+                    error: 'Invalid workspaceId'
+                }, 400)
+            }
 
             const member = await getMembers({
                 databases,

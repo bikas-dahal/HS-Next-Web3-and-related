@@ -3,20 +3,13 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import { ProjectIdSetttingClient } from './client'
 
-interface ProjectIdSettingsPageProps {
-    params: {
-        projectId: string
-    }
-}
-
-const ProjectIdSettingsPage = async ({params}: ProjectIdSettingsPageProps) => {
+const ProjectIdSettingsPage = async () => {
     
     const user = getCurrent()
     if (!user) {
-        redirect('sign-in')
+        redirect('/sign-in')
     }
 
-    // const initialValues = await getProject({projectId: params.projectId})
 
   return (
     <ProjectIdSetttingClient />

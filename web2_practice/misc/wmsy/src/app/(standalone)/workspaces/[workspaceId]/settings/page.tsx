@@ -1,5 +1,4 @@
 import { getCurrent } from '@/features/auth/queries'
-import { EditWorkspaceForm } from '@/features/workspaces/components/edit-workspace-form'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import { WorkspaceIdSettingsClient } from './client'

@@ -2,14 +2,14 @@ import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { cn } from "@/lib/utils";
-import { Project, TaskStatus } from "@/schemas/types";
+import { Member, Project, TaskStatus } from "@/schemas/types";
 import { useRouter } from "next/navigation";
 
 interface EventCardProps {
     id: string;
     title: string;
     project: Project;
-    assignee: any;
+    assignee: Member;
     status: TaskStatus;
 }
 

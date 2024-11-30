@@ -3,7 +3,7 @@ import { useGetMembers } from "@/features/members/api/use-get-members"
 import { useGetProjects } from "@/features/projects/api/use-get-projects"
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id"
 import { TaskStatus } from "@/schemas/types"
-import { CrossIcon, FolderIcon, ListCheckIcon, UserIcon, XIcon } from "lucide-react"
+import { FolderIcon, ListCheckIcon, UserIcon, XIcon } from "lucide-react"
 import { useTaskFilters } from "../hooks/use-task-filters"
 import { DatePicker } from "@/components/date-picker"
 
@@ -33,8 +33,7 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
         assigneeId,
         projectId,
         status,
-        dueDate,
-        search
+        dueDate
     }, setFilters] = useTaskFilters();
 
 

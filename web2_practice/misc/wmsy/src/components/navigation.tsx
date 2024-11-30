@@ -4,7 +4,7 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { GoHome, GoListOrdered, GoListUnordered, GoGear, GoPeople, GoCheckCircle } from "react-icons/go"
+import { GoHome, GoGear, GoPeople, GoCheckCircle } from "react-icons/go"
 import { GoHomeFill } from "react-icons/go"
 import { GoCheckCircleFill } from "react-icons/go"
 const routes = [

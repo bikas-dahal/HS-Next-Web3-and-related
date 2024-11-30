@@ -99,7 +99,7 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
                 weekdayFormat: (date, culture, localizer) => localizer?.format(date, 'EEEE', culture) ?? '',
             }}
             components={{
-                eventWrapper: ({ event, children }) => (
+                eventWrapper: ({ event }) => (
                     <EventCard
                         id={event.id}
                         title={event.title}

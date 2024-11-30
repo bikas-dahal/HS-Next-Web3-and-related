@@ -1,4 +1,5 @@
 import {Account, Models, Databases, Storage, Users} from "node-appwrite";
+import { MemberRole } from "./memberTypes";
 // import Database = Models.Database;
 
 
@@ -43,3 +44,9 @@ export type Task = Models.Document & {
     dueDate: string;
     description: string;
 }
+
+export type Member = Models.Document & {
+    userId: string;
+    role: MemberRole
+    workspaceId: string;
+} 

@@ -2,7 +2,7 @@ import { Task, TaskStatus } from "@/schemas/types";
 import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import { KanbanColumnHeader } from "./kanban-column-header";
-import { useCreateTaskModal } from "../hooks/use-create-task-modal";
+// import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 import { KanbanCard } from "./kanban-card";
 
 interface DataKanbanProps {

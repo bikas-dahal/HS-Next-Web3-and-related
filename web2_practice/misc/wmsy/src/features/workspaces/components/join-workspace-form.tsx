@@ -41,7 +41,7 @@ export const JoinWorkspaceForm = ({initialValues }: JoinWorkspaceFormProps) => {
                     Join Workspace
                 </CardTitle>
             <CardDescription className="p-4">
-                You've been invited to join the workspace <strong>{initialValues?.name}</strong>
+                You&apos;ve been invited to join the workspace <strong>{initialValues?.name}</strong>
             </CardDescription>
             </CardHeader>
             <Separator className="px-4" />

@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 interface MemberAvatarProps {
     name: string;

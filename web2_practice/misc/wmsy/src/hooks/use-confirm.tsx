@@ -1,9 +1,8 @@
 import { ResponsiveModal } from "@/components/responsive-modal"
 import { Button, ButtonProps } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { resolve } from "path"
+
 import { useState } from "react"
-import { set } from "zod"
 
 export const useConfirm = (
     title: string,

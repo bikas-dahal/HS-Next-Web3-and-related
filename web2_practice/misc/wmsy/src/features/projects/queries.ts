@@ -1,7 +1,7 @@
 import { createSessionClient } from "@/lib/appwrite"
 import { getMembers } from "@/features/members/utils"
 import { Project } from "@/schemas/types"
-import { DATABASE_ID, PROJECTS_ID, WORKSPACES_ID } from "@/config"
+import { DATABASE_ID, PROJECTS_ID } from "@/config"
 
 export const getProject = async ({ projectId }: {projectId: string}) => {
     // throw new Error('Not implemented')

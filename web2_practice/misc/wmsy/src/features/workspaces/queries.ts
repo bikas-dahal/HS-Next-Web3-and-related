@@ -1,8 +1,8 @@
 'use server'
 
-import {Account, Client, Databases, Query} from "node-appwrite";
-import {cookies} from "next/headers";
-import {AUTH_COOKIE} from "@/features/auth/constants";
+import { Models, Query} from "node-appwrite";
+// import {cookies} from "next/headers";
+// import {AUTH_COOKIE} from "@/features/auth/constants";
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 import { getMembers } from "../members/utils";
 import { Workspace } from "@/schemas/types";
@@ -30,7 +30,7 @@ export const getWorkspaces = async () => {
 
         const workspaceIds = members.documents.map((member) => member.workspaceId)
 
-        const workspaces = await databases.listDocuments(
+        const workspaces = await databases.listDocuments<Models.Document>(
             DATABASE_ID,
             WORKSPACES_ID,
            [

@@ -14,7 +14,7 @@ export const ProjectAvatar = ({ image, name, classname, fallbackClassName }: Pro
     if (image) {
         return (
             <div className={cn('size-5 relative rounded-md overflow-hidden', classname)}>
-                <Image src={image} alt={name} fill className={'object-cover'} />
+                <Image src={image} alt={name!} fill className={'object-cover'} />
             </div>
         )
     }
@@ -22,7 +22,7 @@ export const ProjectAvatar = ({ image, name, classname, fallbackClassName }: Pro
     return(
         <Avatar className={cn('size-5 rounded-md', classname)}>
             <AvatarFallback className={cn("text-white bg-pink-600 font-semibold rounded-md text-sm uppercase", fallbackClassName)}>
-                {name.slice(0, 1).toUpperCase()}
+                {name?.slice(0, 1).toUpperCase()}
             </AvatarFallback>
         </Avatar>
     )

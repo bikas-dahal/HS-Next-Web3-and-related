@@ -7,6 +7,7 @@ import { getMembers } from "../utils";
 import { DATABASE_ID, MEMBERS_ID } from "@/config";
 import { Query } from "node-appwrite";
 import { MemberRole } from "@/schemas/memberTypes";
+import { Member } from "@/schemas/types";
 
 const app = new Hono()
     .get(
@@ -32,7 +33,7 @@ const app = new Hono()
                 }, 401)
             }
 
-            const members = await databases.listDocuments(
+            const members = await databases.listDocuments<Member>(
                 DATABASE_ID,
                 MEMBERS_ID,
                 [Query.equal('workspaceId', workspaceId)]
@@ -43,7 +44,7 @@ const app = new Hono()
                     const user = await users.get(member.userId)
                     return {
                         ...member,
-                        name: user.name,
+                        name: user.name || user.email,
                         email: user.email
                     }
                 })

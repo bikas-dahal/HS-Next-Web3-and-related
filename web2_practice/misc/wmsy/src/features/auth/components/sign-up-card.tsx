@@ -14,6 +14,7 @@ import {signUpFormSchema, signUpType} from "@/schemas/signUpSchema";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {Separator} from "@/components/ui/separator";
 import {useRegister} from "@/features/auth/api/use-register";
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 
 
 
@@ -110,13 +111,13 @@ export const SignUpCard = () => {
                 <DottedSeparator/>
             </div>
             <CardContent className={'flex flex-col p-7 gap-y-4'}>
-                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
-                    <FcGoogle className={'mr-2 size-5'}/>
+                <Button onClick={() => signUpWithGoogle()} size={"lg"} disabled={isPending} variant={"secondary"}>
+                    <FcGoogle className={'mr-2 size-5'} />
                     Login with Google</Button>
-                <Button size={"lg"} disabled={isPending} variant={"secondary"}>
-                    <FaGithub className={'mr-2 size-5'}/>
-                    Login with Github</Button>
-
+                <Button onClick={() => signUpWithGithub()} size={"lg"} disabled={isPending} variant={"secondary"}>
+                    <FaGithub className={'mr-2 size-5'} />
+                    Login with Github
+                </Button>
             </CardContent>
             <div className={'px-7'}>
                 <DottedSeparator/>

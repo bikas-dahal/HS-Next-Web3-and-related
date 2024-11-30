@@ -1,7 +1,6 @@
 import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { getMembers } from "@/features/members/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { MemberRole } from "@/schemas/memberTypes";
 import { createProjectSchema, updateProjectSchema } from "@/schemas/projectSchema";
 import { Project, TaskStatus } from "@/schemas/types";
 import { zValidator } from "@hono/zod-validator";
@@ -214,7 +213,7 @@ const app = new Hono()
                 }, 401)
             }
 
-            const projects = await databases.listDocuments(
+            const projects = await databases.listDocuments<Project>(
                 DATABASE_ID,
                 PROJECTS_ID,
                 [

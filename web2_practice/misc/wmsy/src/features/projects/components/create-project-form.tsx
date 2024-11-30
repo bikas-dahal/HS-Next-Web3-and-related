@@ -8,10 +8,6 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { 
-  createWorkspaceSchema, 
-  createWorkspaceType 
-} from "@/schemas/workspaceSchema";
-import { 
   Form, 
   FormControl, 
   FormField, 
@@ -135,6 +131,7 @@ export const CreateProjectForm = ({ onCancel }: CreateprojectFormProps) => {
                       jpg, png, svg, or jpeg | max 1MB
                     </p>
                     <input 
+                      title="hi"
                       className="hidden"
                       accept=".jpg, .png, .svg, /jpeg"
                       type="file"
