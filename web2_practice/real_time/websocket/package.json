@@ -12,7 +12,14 @@
   "description": "",
   "dependencies": {
     "@types/ws": "^8.5.13",
+    "dotenv": "^16.4.6",
+    "express": "^4.21.1",
+    "pg": "^8.13.1",
     "typescript": "^5.7.2",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/pg": "^8.11.10"
   }
 }
