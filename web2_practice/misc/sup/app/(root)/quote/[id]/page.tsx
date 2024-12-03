@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react'
 import {client} from "@/sanity/lib/client";
-import {PLAYLIST_BY_SLUG_QUERY, QUOTE_BY_ID_QUERY} from "@/sanity/lib/queries";
+import {COMMENT_BY_QUOTE_ID_QUERY, PLAYLIST_BY_SLUG_QUERY, QUOTE_BY_ID_QUERY} from "@/sanity/lib/queries";
 import {notFound} from "next/navigation";
 import {formatDate} from "@/lib/utils";
 import Link from "next/link";
@@ -9,6 +9,11 @@ import markdownit from 'markdown-it'
 import {Skeleton} from "@/components/ui/skeleton";
 import View from "@/components/View";
 import PhilosophyCard, {PhilosophyTypeCard} from "@/components/PhilosophyCard";
+import { auth } from '@/auth';
+import { CommentForm } from '@/components/CommentForm';
+import {sanityFetch, SanityLive} from "@/lib/live";
+
+
 
 export const experimental_ppr = true
 
@@ -19,10 +24,21 @@ const md = markdownit()
 const Page = async ({ params }: { params: Promise<{id: string}>}) => {
     const id = (await params).id
 
-    const [post, {select: editorPosts }] = await Promise.all([
+    const session = await auth()
+
+
+    const [post,  {select: editorPosts }] = await Promise.all([
         client.fetch(QUOTE_BY_ID_QUERY, { id }),
+        client.fetch(COMMENT_BY_QUOTE_ID_QUERY, { id }),
         client.fetch(PLAYLIST_BY_SLUG_QUERY, {slug: 'editor-s-picks'})
     ])
+
+    // const comments = await client.fetch(COMMENT_BY_QUOTE_ID_QUERY, { id })
+
+    const {data: comments } = await sanityFetch({query: COMMENT_BY_QUOTE_ID_QUERY, params: {id}})
+
+
+
 
     // Parallel and sequential data fetching...
 
@@ -36,6 +52,9 @@ const Page = async ({ params }: { params: Promise<{id: string}>}) => {
 
     const parsedContent = md.render(post?.pitch || '')
 
+    console.log(comments);
+    
+
     return (
         <>
             <section className={'pink_container !min-h-[230px]'}>
@@ -47,7 +66,7 @@ const Page = async ({ params }: { params: Promise<{id: string}>}) => {
             </section>
 
             <section className={'section_container'}>
-                <img src={post.image} alt={post.title} className={'w-full h-auto rounded-xl'} />
+                <img src={post.image} alt={post.title} className={'w-[80vw] h-[90vh] rounded-xl'} />
                 <div className={'space-y-5 mt-10 max-w-4xl mx-auto'}>
                     <div className={'flex-between gap-5'}>
                         <Link href={`/user/${post.author?._id}`} className={'flex gap-2 items-center mb-3'}>
@@ -72,6 +91,57 @@ const Page = async ({ params }: { params: Promise<{id: string}>}) => {
                     )}
                 </div>
 
+                <hr className='divider' />
+
+                <section className={'section_container'}>
+                {/* Comments Section */}
+                <div className={'max-w-4xl mx-auto'}>
+                    <h3 className={'text-30-bold mb-5'}>Comments</h3>
+                    
+                    {/* Comment Form - Only show if user is logged in */}
+                    {session && (
+                        <div className={'mb-6'}>
+                            <CommentForm quoteId={id} />
+                        </div>
+                    )}
+
+                    {/* Comments List */}
+                    {comments.length > 0 ? (
+                        <ul className={'space-y-4'}>
+                            {comments.map((comment: any) => (
+                                <li 
+                                    key={comment._id} 
+                                    className={'bg-gray-50 p-4 rounded-lg'}
+                                >
+                                    <div className={'flex items-center gap-3 mb-2'}>
+                                        <Image 
+                                            src={comment.author?.image} 
+                                            alt={comment.author?.name} 
+                                            width={40} 
+                                            height={40} 
+                                            className={'rounded-full'}
+                                        />
+                                        <div>
+                                            <p className={'font-semibold'}>{comment.author?.name}</p>
+                                            <p className={'text-xs text-gray-500'}>
+                                                {formatDate(comment._createdAt)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p>{comment.comment}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className={'text-center text-gray-500'}>
+                            No comments yet. Be the first to comment!
+                        </p>
+                    )}
+                </div>
+            </section>
+
+                {/* comments form and existing comments */}
+
                 <hr className={'divider'} />
 
                 {editorPosts?.length > 0 && (
@@ -88,6 +158,8 @@ const Page = async ({ params }: { params: Promise<{id: string}>}) => {
             {/*    TODO recommendation */}
 
             </section>
+                      <SanityLive />
+
 
 <Suspense fallback={<Skeleton className={'view_skeleton'} />}>
     <View id={id} />

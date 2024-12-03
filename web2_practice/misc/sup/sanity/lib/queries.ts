@@ -30,6 +30,16 @@ export const QUOTE_BY_AUTHOR_QUERY = defineQuery(`*[_type == 'quote' && author._
     
 }`)
 
+export const COMMENT_BY_QUOTE_ID_QUERY = defineQuery(`*[_type == 'comment' && quote._ref == $id ] | order(_createdAt desc){
+    _id,
+        comment,
+        views,
+        _createdAt,
+        author -> {
+            _id, name, username, image
+        }
+}`)
+
 export const QUOTE_BY_ID_QUERY = defineQuery(`*[_type == 'quote' && _id == $id ][0]{
     _id,
         title,
@@ -56,7 +66,7 @@ export const AUTHOR_BY_GITHUB_ID_QUERY =defineQuery(`
         name,
         username,
         email,
-        image,
+        image,  
         bio
  }
 `)

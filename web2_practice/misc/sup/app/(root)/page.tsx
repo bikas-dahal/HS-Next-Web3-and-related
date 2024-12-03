@@ -37,10 +37,10 @@ export default async function Home({searchParams}: {searchParams: Promise<{ quer
       <>
         <section className={'pink_container'}>
           <h1 className={'heading'}>
-            Pitch your quote...<br />Connect with Philosophers 🔓
+            Pitch your Wisdom...<br />Connect with Philosophers 🔓
           </h1>
             <p className={'sub-heading !max-w-3xl'}>
-                Submit your take, Vote on opinions and Get noticed in virtual Wisdom
+                Submit your take, View on opinions and Get noticed in virtual Wisdom world.
             </p>
             <SearchForm query={query} />
         </section>

@@ -84,7 +84,7 @@ const QuoteForm = () => {
     })
 
     return (
-        <form action={formAction} className={'startup-form'}>
+        <form action={formAction} className={'startup-form '}>
             <div>
                 <label htmlFor={'title'} className={'startup-form_label'}>
                     Title

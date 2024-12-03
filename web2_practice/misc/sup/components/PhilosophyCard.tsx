@@ -4,17 +4,19 @@ import {EyeIcon} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
-import {Author, Quote} from "@/sanity/types";
+import {Author, Comment, Quote} from "@/sanity/types";
 import {Skeleton} from "@/components/ui/skeleton";
 
 export type PhilosophyTypeCard = Omit<Quote, 'author'> & { author?: Author };
+
+export type CommentTypeCard = Omit<Comment, 'author'> & { author?: Author };
 
 const PhilosophyCard = ({post}: {post: PhilosophyTypeCard}) => {
 
     const { _createdAt, views, author, title, category, _id, image, description } = post;
 
     return (
-        <li className={'startup-card group'}>
+        <li className={'startup-card group '}>
             <div className={'flex-between'}>
                 <p className={'startup-card_date'}>
                     {formatDate(_createdAt)}

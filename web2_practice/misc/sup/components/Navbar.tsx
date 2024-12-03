@@ -10,13 +10,13 @@ const Navbar = async () => {
     const session = await auth()
 
     return (
-        <header className={'px-6 py-3 shadow-sm font-work-sans'}>
-            <nav className={'flex justify-between items-center'}>
-                <Link href={'/web2_practice/misc/sup/public'}>
-                    <Image src={'/dh.png'} alt={'logo'} width={20} height={20} />
+        <header className={'px-6 py-3 shadow-sm bg-slate-200 font-work-sans'}>
+            <nav className={'flex justify-between items-center '}>
+                <Link href={'/'}>
+                    <Image src={'/logo.jpg'} alt={'logo'} className='rounded-md' width={60} height={30} />
                 </Link>
 
-                <div className={'flex gap-5 items-center bg-white text-black'}>
+                <div className={'flex gap-5 items-center text-black'}>
                     {session && session?.user ? (
                         <>
                             <Link href={'/quote/create'}><span className={'max-sm:hidden'}>Create</span>
@@ -48,8 +48,14 @@ const Navbar = async () => {
                             'use server'
                             await signIn('github')
                         }}>
-                            <button type={'submit'}><span className={''}>Login</span></button>
+                            <button type={'submit'}><span className={''}>Login with Github</span></button>
                         </form>
+                        {/* <form action={async () => {
+                            'use server'
+                            await signIn('google')
+                        }}>
+                            <button type={'submit'}><span className={''}>Login with Google</span></button>
+                        </form> */}
                     </>}
                 </div>
             </nav>
