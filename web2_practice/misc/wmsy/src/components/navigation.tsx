@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { GoHome, GoGear, GoPeople, GoCheckCircle } from "react-icons/go"
 import { GoHomeFill } from "react-icons/go"
 import { GoCheckCircleFill } from "react-icons/go"
+
 const routes = [
     {
         label: 'Home',

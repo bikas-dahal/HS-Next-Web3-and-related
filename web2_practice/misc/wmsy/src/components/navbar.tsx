@@ -13,8 +13,8 @@ const pathnameMap = {
         title: 'My Projects',
         description: 'Monitor all of your projects here'
     },
-
 }
+
 
 const defaultMap = {
     title: 'Home',
